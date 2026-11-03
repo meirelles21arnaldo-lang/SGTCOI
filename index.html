@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Laser Training</title>
+<style>
+:root{--ink:#1e2a38;--steel:#2b4a6f;--sun:#ffc933;--red:#e4412f;--ok:#2e9e5b;--paper:#fff8e5;--sky:#9fd4ee}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Arial Rounded MT Bold","Trebuchet MS",Verdana,sans-serif;background:var(--sky);color:var(--ink);min-height:100vh}
+button{font:inherit;cursor:pointer;color:inherit}
+button:focus-visible,input:focus-visible{outline:4px solid var(--ink);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:12px}
+.card{background:var(--paper);border:4px solid var(--ink);border-radius:22px;padding:16px;box-shadow:0 6px 0 var(--ink);margin-bottom:14px}
+h1{font-size:2rem;margin:0 0 6px}h2{font-size:1.4rem;margin:0 0 6px}p{margin:6px 0;line-height:1.4}
+.btn{background:var(--sun);border:4px solid var(--ink);border-radius:16px;padding:12px 20px;font-size:1.1rem;box-shadow:0 5px 0 var(--ink);transition:transform .08s}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--ink)}
+.btn:disabled{background:#cfcfcf;color:#777;cursor:not-allowed}
+.btn.alt{background:#fff}
+input{font:inherit;padding:10px;border:3px solid var(--ink);border-radius:12px;width:100%;margin:4px 0 10px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.ticket{background:#fff;border:3px dashed var(--steel);border-radius:10px;padding:8px 12px;font-size:.95rem}
+.nav{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:14px}
+.st{background:var(--steel);color:#fff;border:4px solid var(--ink);border-radius:16px;padding:8px 2px;text-align:center;box-shadow:0 5px 0 var(--ink);font-size:.85rem}
+.st b{display:block;font-size:1.8rem}
+.st.on{background:var(--sun);color:var(--ink)}.st.ok{background:var(--ok)}.st.lock{background:#8a95a1;opacity:.7}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.it{background:#fff;border:4px solid var(--ink);border-radius:16px;padding:10px;text-align:center;font-size:.95rem;min-height:110px}
+.it i{display:block;font-style:normal;font-size:2.4rem}
+.lay{display:grid;grid-template-columns:1fr;gap:14px}.itp{align-self:start}.itp table{font-size:.78rem}.hl td{background:var(--sun);font-weight:bold}
+@media (min-width:900px){.lay{grid-template-columns:1fr 380px}.itp{position:sticky;top:12px}}
+.cell{display:flex;flex-direction:column;gap:6px}.cell .it{flex:1}.dtb{font-size:.85rem;background:#fff;border:3px solid var(--ink);border-radius:10px;padding:4px}.dtx{background:#fff;border:3px dashed var(--steel);border-radius:10px;padding:6px;font-size:.85rem}
+.it.sel{background:var(--sun)}.it.done{background:#bfe8cf;opacity:.8}
+.it .n{display:inline-block;background:var(--ink);color:#fff;border-radius:50%;width:26px;height:26px;line-height:26px;margin-top:4px}
+.sl{margin:14px 0}.sl label{display:flex;justify-content:space-between;font-size:1.05rem}
+.sl input[type=range]{padding:0;border:0;height:34px}
+.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);max-width:92vw;padding:12px 18px;border:4px solid var(--ink);border-radius:16px;font-size:1.05rem;box-shadow:0 5px 0 var(--ink);z-index:9}
+.toast.g{background:#bfe8cf}.toast.b{background:#ffb4a8}
+table{border-collapse:collapse;width:100%;font-size:.85rem}td,th{border:2px solid var(--ink);padding:4px 6px;text-align:left}
+.scroll{overflow-x:auto}
+.big{font-size:3rem;margin:0}
+@media (prefers-reduced-motion:reduce){.btn{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<div class="toast" id="toast" hidden></div>
+<script>
+"use strict";
+const $=s=>document.querySelector(s), A=$("#app"), KEY="sc_laser_resultados";
+let S, tt;
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+
+/* Conteúdo do nível. EXEMPLO: trocar pelos dados reais das ITs da Santa Clara (RN01) */
+const IT1=[["FLG-201","SAE 1020","2,0","O₂","1,2","0,8","-1,0","1,0"],["FLG-203","SAE 1020","3,0","O₂","1,5","0,7","-1,5","1,0"],["FLG-205","Inox 304","3,0","N₂","2,0","12","-3,0","0,8"],["FLG-210","SAE 1020","6,0","O₂","1,8","0,5","-2,5","1,2"]];
+function mk1(){const W="Passo fora de ordem. Revise o procedimento.";return[
+ [ // 0 Segurança
+  {t:"multi",h:"1. Vista os EPIs",p:"Selecione todos os EPIs exigidos para operar este laser.",it:[
+   ["🥽","Óculos para laser 1064 nm (OD 5+)",1],["🥽","Óculos para laser 532 nm (OD 5+)",0],["🥽","Óculos para laser CO₂ 10600 nm",0],["🕶️","Óculos de solda (filtro escuro)",0],["🧤","Luva de raspa",1],["🧤","Luva nitrílica",0],["🥾","Botina com biqueira",1],["👟","Tênis antiderrapante",0],["🎧","Protetor auricular tipo plug",1],["👷","Capacete",0],["🧥","Avental de PVC",0]],
+   w:"Há EPIs errados ou faltando. Revise."},
+  {t:"multi",h:"2. Inspecione a área",p:"Você chegou ao posto. Marque tudo o que impede iniciar a operação.",it:[
+   ["🧯","Extintor de água ao lado do painel elétrico",1],["🛑","Botão de emergência livre e testado",0],["🔬","Lente de proteção do cabeçote com marcas de queimado",1],["🚪","Intertravamento da porta testado no turno",0],["🟦","Cilindro de O₂ sem corrente de fixação",1],["🧱","Mesa de corte limpa, sem escória",0],["💡","Luz de aviso de laser ligado queimada",1],["🟨","Faixa de risco no piso visível",0],["💨","Filtro da exaustão saturado com alarme ativo",1],["🪟","Visor da cabine com filtro para 1064 nm",0],["🔹","Bico do cabeçote deformado",1],["🚪","Porta da cabine fechada e travada",0]],
+   w:"A inspeção está incorreta. Revise."},
+  {t:"seq",h:"3. Bloqueio de energia (troca de bico)",p:"Toque nos passos na ordem correta.",it:[
+   ["⏻","Desligar a máquina no painel",0],["🔒","Bloquear a chave geral com cadeado",1],["🏷️","Etiquetar com nome e data",2],["🧪","Testar ausência de energia",3]],w:W}],
+ [ // 1 Máquina
+  {t:"one",h:"Separe a chapa",p:"Pegue no estoque a chapa da peça do pedido.",it:[["🟫","SAE 1020 – 3,0 mm",1],["🟫","SAE 1020 – 3,75 mm",0],["🟫","SAE 1020 – 2,0 mm",0],["🟫","SAE 1045 – 3,0 mm",0],["⬜","Inox 304 – 3,0 mm",0]],w:"Chapa não atende ao pedido."},
+  {t:"one",h:"Monte o bico",p:"Escolha o bico do cabeçote para essa chapa.",it:[["🔹","Bico 1,2 mm",0],["🔹","Bico 1,5 mm",1],["🔷","Bico 1,8 mm",0],["🔷","Bico 2,0 mm",0]],w:"Bico não confere com a IT."},
+  {t:"one",h:"Abra o gás",p:"Escolha o gás de assistência para essa chapa.",it:[["🟦","Oxigênio (O₂)",1],["🟩","Nitrogênio (N₂)",0],["💨","Ar comprimido",0],["⬜","Argônio",0]],w:"Gás não confere com a IT."}],
+ [ // 2 Código
+  {t:"seq",h:"Monte o programa de corte",p:"Toque nos passos na ordem da IT.",it:[
+   ["📂","Carregar programa FLANGE_3MM",0],["📍","Definir origem da peça",1],["🟦","Abrir válvula de gás",2],["👀","Rodar simulação a seco",3],["▶️","Iniciar o corte",4]],w:W}],
+ [ // 3 Ajuste (aço carbono 3,0: 0,7 bar ±0,1 / foco -1,5 ±0,5 / altura 1,0 ±0,2)
+  {t:"adj",h:"Ajuste o cabeçote",p:"Regule o cabeçote conforme a IT para essa chapa.",r:[
+   {k:"Pressão do gás",u:"bar",min:0,max:15,st:0.1,v:5,lo:0.6,hi:0.8},
+   {k:"Foco",u:"mm",min:-4,max:2,st:0.5,v:0,lo:-2,hi:-1},
+   {k:"Altura do bico",u:"mm",min:0.5,max:3,st:0.1,v:2.5,lo:0.8,hi:1.2}]}]
+]}
+
+function itHTML(){const t=LV[S.lv].it;return `<aside class="card itp"><h2>📖 ${t.t}</h2><p><small>${t.info}</small></p><div class="scroll"><table><tr>${t.head.map(c=>"<th>"+c+"</th>").join("")}</tr>${t.rows.map(r=>"<tr"+(r[0]==t.hl?' class="hl"':"")+">"+r.map(c=>"<td>"+c+"</td>").join("")+"</tr>").join("")}</table></div><p><small>${t.note}</small></p></aside>`}
+
+/* ===== PRENSA (EXEMPLO: trocar pelos dados reais da IT da prensa) ===== */
+const IT2=[["SUP-110","SAE 1010","1,5","MT-11","Óleo leve","25","210","40"],["SUP-120","SAE 1010","2,0","MT-12","Óleo leve","40","205","30"],["SUP-130","SAE 1020","3,0","MT-13","Óleo pesado","65","198","20"],["SUP-140","Inox 304","2,0","MT-14","Óleo EP","55","200","25"]];
+function mk2(){const W="Passo fora de ordem. Revise o procedimento.";return[
+ [ // 0 Segurança
+  {t:"multi",h:"1. Vista os EPIs",p:"Selecione todos os EPIs exigidos para operar esta prensa.",it:[
+   ["🥽","Óculos de segurança com proteção lateral",1],["🥽","Óculos de segurança sem proteção lateral",0],["🕶️","Óculos de solda (filtro escuro)",0],["🧤","Luva de raspa de punho curto",1],["🧤","Luva de tecido de punho longo",0],["🥾","Botina com biqueira de aço",1],["👞","Sapato de couro sem biqueira",0],["🎧","Protetor auricular tipo concha",1],["👷","Capacete",0],["⌚","Relógio e pulseira",0],["🧥","Avental de PVC",0]],
+   w:"Há EPIs errados ou faltando. Revise."},
+  {t:"multi",h:"2. Inspecione a área",p:"Você chegou ao posto. Marque tudo o que impede iniciar a operação.",it:[
+   ["⚙️","Protetor do volante instalado com apenas 2 dos 4 parafusos",1],["🛡️","Cortina de luz alinhada e testada no turno",0],["🖐️","Botão direito do bimanual travado com um pedaço de madeira",1],["🛢️","Lubrificação no nível, sem vazamento",0],["🛑","Botão de emergência que não trava ao ser pressionado",1],["🔌","Painel elétrico fechado, sem fios expostos",0],["🟨","Poça de óleo no piso em frente ao operador",1],["🗑️","Área limpa, sem sucata no acesso à saída",0],["🔩","Grampos de fixação da matriz folgados",1],["⚠️","Sinalização de zona de risco visível ao redor da prensa",0],["🦶","Pedal de acionamento sem proteção, além do bimanual",1],["📋","Registro do teste de tempo de parada vencido há 2 meses",1]],
+   w:"A inspeção está incorreta. Revise."},
+  {t:"seq",h:"3. Bloqueio de energia (troca de matriz)",p:"Toque nos passos na ordem correta.",it:[
+   ["⏻","Desligar o motor principal no painel",0],["🔒","Bloquear a chave geral com cadeado",1],["🏷️","Etiquetar com nome e data",2],["🌀","Aliviar a energia residual (volante parado)",3],["🧪","Testar ausência de energia",4]],w:W}],
+ [ // 1 Ferramenta
+  {t:"one",h:"Separe a chapa",p:"Pegue no estoque a chapa da peça do pedido.",it:[["🟫","SAE 1010 – 2,0 mm",1],["🟫","SAE 1010 – 1,5 mm",0],["🟫","SAE 1020 – 2,0 mm",0],["🟫","SAE 1020 – 3,0 mm",0],["⬜","Inox 304 – 2,0 mm",0]],w:"Chapa não atende ao pedido."},
+  {t:"one",h:"Escolha a matriz",p:"Pegue a matriz da peça do pedido.",it:[["🧰","MT-11",0],["🧰","MT-12",1],["🧰","MT-13",0],["🧰","MT-14",0]],w:"Matriz não confere com a IT."},
+  {t:"one",h:"Lubrifique a chapa",p:"Escolha o lubrificante.",it:[["🛢️","Óleo leve",1],["🛢️","Óleo pesado",0],["🛢️","Óleo EP",0],["🚫","Sem lubrificante",0]],w:"Lubrificante não confere com a IT."}],
+ [ // 2 Montagem
+  {t:"seq",h:"Monte a matriz e prepare a partida",p:"Toque nos passos na ordem da IT.",it:[
+   ["🧱","Posicionar a matriz na mesa",0],["🎯","Centralizar a matriz sob o martelo",1],["🔩","Apertar os grampos de fixação",2],["🖐️","Testar bimanual e cortina de luz",3],["🧪","Golpe de teste com sucata",4]],w:W}],
+ [ // 3 Ajuste (SUP-120: 40 t ±2 / 205 mm ±1 / 30 golpes/min ±2)
+  {t:"adj",h:"Ajuste a prensa",p:"Regule a prensa conforme a IT para a peça do pedido.",r:[
+   {k:"Força",u:"t",min:10,max:80,st:1,v:20,lo:38,hi:42},
+   {k:"Altura de fechamento",u:"mm",min:190,max:220,st:1,v:215,lo:204,hi:206},
+   {k:"Golpes por minuto",u:"golpes/min",min:10,max:60,st:1,v:45,lo:28,hi:32}]}]
+]}
+
+const LV=[
+{ic:"🔥",nome:"Laser industrial – flange",ticket:"Pedido: 10× FLG-203",mk:mk1,
+ st:[["🦺","Segurança"],["🔧","Máquina"],["💻","Código"],["🎚️","Ajuste"],["🔥","Cortar"]],
+ it:{t:"IT-LASER-001",info:"Laser de fibra 3 kW, 1064 nm. Potência e velocidade vêm do programa; não ajustar.",head:["Peça","Material","Esp.","Gás","Bico","Pressão","Foco","Altura"],rows:IT1,hl:"FLG-203",note:"Esp., bico, foco e altura em mm; pressão em bar. Tolerâncias: pressão ±0,1 bar, foco ±0,5 mm, altura ±0,2 mm."},
+ fin:{h:"Cortar a peça",msg:"🔥 Cortando a peça...",
+  svg:`<svg viewBox="0 0 300 160" width="100%" style="max-height:240px;background:#6b7785;border:4px solid var(--ink);border-radius:16px"><rect x="30" y="20" width="240" height="120" fill="#b9c2cc" stroke="#1e2a38" stroke-width="3"/><circle id="p1" cx="150" cy="80" r="50" fill="none" stroke="#e4412f" stroke-width="3" stroke-dasharray="315" stroke-dashoffset="315"/><circle id="p2" cx="150" cy="80" r="14" fill="none" stroke="#e4412f" stroke-width="3" stroke-dasharray="90" stroke-dashoffset="90"/></svg>`,
+  anim:d=>{let k=0;const a=$("#p1"),b=$("#p2");const iv=setInterval(()=>{k+=2;b.style.strokeDashoffset=Math.max(0,90-k*2);a.style.strokeDashoffset=Math.max(0,315-Math.max(0,k-45)*4);if(k>=125){clearInterval(iv);d()}},40)}}},
+{ic:"🔨",nome:"Prensa industrial – suporte",ticket:"Pedido: 10× SUP-120",mk:mk2,
+ st:[["🦺","Segurança"],["🧰","Ferramenta"],["📋","Montagem"],["🎚️","Ajuste"],["🔨","Prensar"]],
+ it:{t:"IT-PRENSA-001",info:"Prensa excêntrica 80 t, comando bimanual e cortina de luz. Peças em chapa dobrada.",head:["Peça","Material","Esp.","Matriz","Lubrif.","Força","Altura","Golpes"],rows:IT2,hl:"SUP-120",note:"Esp. e altura de fechamento em mm; força em t; golpes por minuto. Tolerâncias: força ±2 t, altura ±1 mm, golpes ±2."},
+ fin:{h:"Prensar a peça",msg:"🔨 Prensando a peça...",
+  svg:`<svg viewBox="0 0 300 160" width="100%" style="max-height:240px;background:#6b7785;border:4px solid var(--ink);border-radius:16px"><rect x="30" y="140" width="240" height="16" fill="#2b4a6f"/><rect x="90" y="116" width="120" height="24" fill="#8a95a1" stroke="#1e2a38" stroke-width="3"/><rect x="80" y="110" width="140" height="6" fill="#b9c2cc"/><rect x="140" y="0" width="20" height="30" fill="#1e2a38"/><rect id="ram" x="90" y="20" width="120" height="40" fill="#e4412f" stroke="#1e2a38" stroke-width="3"/></svg>`,
+  anim:d=>{let k=0;const r=$("#ram");const iv=setInterval(()=>{k++;r.setAttribute("y",20+50*Math.abs(Math.sin(k*Math.PI/20)));if(k>=60){clearInterval(iv);d()}},50)}}}
+];
+
+/* ===== BANCO DE DADOS =====
+   Para ATIVAR: (1) suba o backend_banco.js, (2) comente as 2 funções "MODO TESTE" abaixo,
+   (3) descomente o bloco "BANCO REAL" e ajuste API_URL. */
+
+// --- MODO TESTE (sem banco): aceita qualquer matrícula e só guarda no navegador ---
+async function validarMatricula(mat){return {matricula:mat,nome:null}}
+async function enviarSessao(r){return false}
+
+// --- BANCO REAL (descomente) ---
+// const API_URL="http://localhost:3000";   // endereço do servidor na rede da fábrica
+// async function validarMatricula(mat){
+//   try{
+//     const r=await fetch(API_URL+"/api/operador/"+encodeURIComponent(mat));
+//     if(r.status==404)return null;          // matrícula não cadastrada
+//     if(!r.ok)return {erro:"offline"};
+//     return await r.json();                 // {matricula, nome, setor}
+//   }catch(e){return {erro:"offline"}}
+// }
+// async function enviarSessao(r){
+//   try{
+//     const x=await fetch(API_URL+"/api/sessoes",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(r)});
+//     return x.ok;
+//   }catch(e){return false}
+// }
+
+// reenvia sessões que ficaram só no navegador (ex.: servidor estava fora)
+async function sincronizar(){const h=load();let ch=0;for(const r of h){if(!r.enviado&&await enviarSessao(r)){r.enviado=1;ch=1}}
+  if(ch)try{localStorage.setItem(KEY,JSON.stringify(h))}catch(e){}}
+
+function toast(m,ok){const t=$("#toast");t.textContent=m;t.className="toast "+(ok?"g":"b");t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,3200)}
+function err(st,n=1){S.er[st]+=n}
+function fmt(s){return String(s/60|0).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
+const load=()=>{try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return[]}};
+
+function start(){
+  A.innerHTML=`<div class="card"><h1>🔥 Laser Training</h1><p>Treinamento de operadores.</p>
+  <p>Treino de 5 a 15 minutos.</p>
+  <label>Nome do operador (só no modo teste)<input id="nm" autocomplete="off"></label><label>Matrícula<input id="mt" autocomplete="off"></label>
+  <button class="btn" id="go">▶ Começar</button></div>`;
+  $("#go").onclick=async()=>{let nome=$("#nm").value.trim();const mat=$("#mt").value.trim();
+    if(!mat)return toast("Digite sua matrícula.",0);
+    const op=await validarMatricula(mat);
+    if(op&&op.erro=="offline")return toast("Sem conexão com o banco de dados. Chame o líder.",0);
+    if(!op)return toast("Matrícula não encontrada. Procure seu líder.",0);
+    nome=op.nome||nome;if(!nome)return toast("Digite seu nome.",0);
+    OP={nome,mat};menu()};
+  sincronizar();
+}
+
+let OP;
+function menu(){A.innerHTML=`<div class="card"><h2>Olá, ${OP.nome}! Escolha a máquina</h2><div class="grid">${LV.map((l,i)=>`<button class="it" data-i="${i}"><i>${l.ic}</i>${l.nome}</button>`).join("")}</div><button class="btn alt" id="sa">⬅ Sair</button></div>`;
+  A.querySelectorAll(".it").forEach(b=>b.onclick=()=>play(+b.dataset.i));$("#sa").onclick=start}
+function play(i){S={nome:OP.nome,mat:OP.mat,lv:i,t0:Date.now(),tries:0,wrong:0,sq:0,sqOk:0,er:[0,0,0,0],cur:0,sg:[0,0,0,0],dn:[0,0,0,0,0],D:LV[i].mk()};game()}
+
+function game(){
+  const s=S,unlocked=i=>i==0||(i<4?s.dn[0]:s.dn[0]&&s.dn[1]&&s.dn[2]&&s.dn[3]);
+  const nav=LV[s.lv].st.map((x,i)=>`<button class="st ${i==s.cur?"on":s.dn[i]?"ok":""} ${unlocked(i)?"":"lock"}" data-i="${i}"><b>${s.dn[i]?"✅":x[0]}</b>${x[1]}</button>`).join("");
+  A.innerHTML=`<div class="card top"><div><b>${s.nome}</b> · ${LV[s.lv].nome} · <span id="tm">${fmt((Date.now()-s.t0)/1000|0)}</span></div>
+  <div class="ticket">🎫 ${LV[s.lv].ticket}</div></div>
+  <div class="lay"><div><div class="nav">${nav}</div><div class="card" id="stage"></div></div>${itHTML()}</div>`;
+  A.querySelectorAll(".st").forEach(b=>b.onclick=()=>{const i=+b.dataset.i;
+    if(!unlocked(i))return toast(i==0?"":s.dn[0]?"Termine as estações anteriores.":"Conclua a Segurança primeiro.",0);s.cur=i;game()});
+  stage();
+}
+
+function adv(){const s=S,c=s.cur;s.sg[c]++;if(s.sg[c]>=s.D[c].length)s.dn[c]=1;
+  if(s.dn[c]){toast("Estação concluída!",1);const nx=s.dn.findIndex((d,i)=>!d&&i<4);s.cur=nx<0?4:nx}game()}
+
+function stage(){
+  const s=S,c=s.cur,el=$("#stage");
+  if(c==4)return cut(el);
+  const g=s.D[c][s.sg[c]];if(!g)return;
+  let h=`<h2>${g.h}</h2><p>${g.p}</p>`;
+  if(g.t=="adj"){
+    h+=g.r.map((r,i)=>`<div class="sl"><label><span>${r.k}</span><b id="v${i}"></b></label><input type="range" id="r${i}" min="${r.min}" max="${r.max}" step="${r.st}" value="${r.v}"></div>`).join("")+`<button class="btn" id="ok">✔ Confirmar ajuste</button>`;
+    el.innerHTML=h;
+    const upd=()=>g.r.forEach((r,i)=>$("#v"+i).textContent=$("#r"+i).value+" "+r.u);
+    el.querySelectorAll("input").forEach(x=>x.oninput=upd);upd();
+    $("#ok").onclick=()=>{let n=0;g.r.forEach((r,i)=>{const v=+$("#r"+i).value;if(v<r.lo||v>r.hi)n++});
+      s.tries+=3;s.wrong+=n;err(3,n);if(n)toast(n+" parâmetro(s) fora do especificado. Consulte a IT.",0);else{toast("Ajuste correto!",1);adv()}};
+    return}
+  if(!g.sh)g.sh=shuffle(g.it.map((x,i)=>i));
+  g.sel=g.sel||{};g.shown=g.shown||{};g.nx=g.nx||0;
+  const draw=()=>{
+    el.innerHTML=h+`<div class="grid">`+(g.t=="seq"?g.sh:g.it.map((x,i)=>i)).map(i=>{const x=g.it[i];
+      const dn=g.t=="seq"&&x[2]<g.nx;
+      return `<div class="cell"><button class="it ${g.sel[i]?"sel":""} ${dn?"done":""}" data-i="${i}"><i>${x[0]}</i>${x[1]}${dn?`<br><span class="n">${x[2]+1}</span>`:""}</button>${x[3]?`<button class="dtb" data-i="${i}">🔍 ${g.shown[i]?"Ocultar":"Ver detalhe"}</button>`:""}${x[3]&&g.shown[i]?`<div class="dtx">${x[3]}</div>`:""}</div>`}).join("")+`</div>`+(g.t=="multi"?`<button class="btn" id="ok">✔ Confirmar</button>`:"");
+    el.querySelectorAll(".it").forEach(b=>b.onclick=()=>click(+b.dataset.i));
+    el.querySelectorAll(".dtb").forEach(b=>b.onclick=()=>{g.shown[+b.dataset.i]=!g.shown[+b.dataset.i];draw()});
+    if(g.t=="multi")$("#ok").onclick=confirm_;
+  };
+  const click=i=>{const x=g.it[i];
+    if(g.t=="multi"){g.sel[i]=!g.sel[i];draw()}
+    else if(g.t=="one"){s.tries++;if(x[2]){toast("Correto!",1);adv()}else{s.wrong++;err(c);toast(g.w,0)}}
+    else{if(x[2]<g.nx)return;s.tries++;s.sq++;if(x[2]==g.nx){g.nx++;s.sqOk++;if(g.nx==g.it.length){toast("Sequência correta!",1);adv()}else draw()}else{s.wrong++;err(c);toast(g.w,0)}}};
+  const confirm_=()=>{let n=0;g.it.forEach((x,i)=>{if(!!g.sel[i]!=!!x[2])n++});s.tries+=g.it.length;s.wrong+=n;err(c,n);
+    if(n)toast(g.w,0);else{toast("Tudo certo!",1);adv()}};
+  draw();
+}
+
+function cut(el){const f=LV[S.lv].fin;
+  if(!S.dn.slice(0,4).every(Boolean)){el.innerHTML=`<h2>${f.h}</h2><p>Conclua as estações anteriores.</p>`;return}
+  el.innerHTML=`<h2>${f.h}</h2><p>${f.msg}</p>${f.svg}`;
+  if(!S.run){S.run=1;setTimeout(()=>f.anim(finish),500)}
+}
+
+async function finish(){
+  const s=S,t=Math.round((Date.now()-s.t0)/1000),taxa=s.tries?(s.tries-s.wrong)/s.tries:1,ad=s.sq?s.sqOk/s.sq:1,tp=Math.min(1,600/Math.max(t,1));
+  const pen=2*s.wrong+2*s.er[0],nota=Math.max(0,Math.round((taxa*.6+ad*.2+tp*.2)*100)-pen),ap=nota>=70?1:0;
+  const r={id:Date.now(),data:new Date().toISOString(),nome:s.nome,matricula:s.mat,maquina:LV[s.lv].nome,nota,taxa_acertos:+(taxa*100).toFixed(1),aderencia_sequencia:+(ad*100).toFixed(1),tempo_s:t,erros_seguranca:s.er[0],erros_maquina:s.er[1],erros_codigo:s.er[2],erros_ajuste:s.er[3],aprovado:ap};
+  r.enviado=(await enviarSessao(r))?1:0;const h=load();h.push(r);try{localStorage.setItem(KEY,JSON.stringify(h))}catch(e){toast("Não foi possível salvar neste computador. Avise o líder.",0)}
+  S.last=r;
+  const stars=nota>=90?"⭐⭐⭐":nota>=75?"⭐⭐":nota>=60?"⭐":"";
+  A.innerHTML=`<div class="card"><p class="big">${ap?"🏆":"🔁"} ${nota} pontos ${stars}</p><h2>${ap?"Aprovado! Peça produzida sem refugo.":"Quase lá. Repita o treino."}</h2>
+  <p>Acertos: <b>${r.taxa_acertos}%</b> · Sequência da IT: <b>${r.aderencia_sequencia}%</b> · Tempo: <b>${fmt(t)}</b></p>
+  <p>Erros: segurança ${r.erros_seguranca}, máquina ${r.erros_maquina}, código ${r.erros_codigo}, ajuste ${r.erros_ajuste}</p><p>Descontos por erros: -${pen} pontos</p>
+  <p>${r.enviado?"✅ Enviado ao banco de dados.":"💾 Salvo só neste computador (banco não conectado)."}</p>
+  <button class="btn" id="a">↻ Escolher máquina</button></div>`;
+  $("#a").onclick=menu;
+}
+
+setInterval(()=>{const e=$("#tm");if(e&&S&&S.t0)e.textContent=fmt((Date.now()-S.t0)/1000|0)},1000);
+start();
+</script>
+</body>
+</html>
