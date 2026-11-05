@@ -2,8 +2,6 @@ Simulador de treinamento para operadores industriais, em formato de jogo web poi
 
 Projeto Integrador para a Indústria Santa Clara. O jogo reproduz as etapas de uma operação real com base nas Instruções de Trabalho (ITs), avalia o operador pelo desempenho e registra a evolução.
 
-**Versão 1.0** (protótipo)
-
 Máquinas
 
 - Laser industrial: corte de flange
