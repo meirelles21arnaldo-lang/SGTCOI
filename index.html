@@ -19,6 +19,9 @@ h1{font-size:2rem;margin:0 0 6px}h2{font-size:1.4rem;margin:0 0 6px}p{margin:6px
 .btn.alt{background:#fff}
 input{font:inherit;padding:10px;border:3px solid var(--ink);border-radius:12px;width:100%;margin:4px 0 10px}
 .top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+#mq [data-p]{outline:none}#mq [data-p]:hover,#mq [data-p]:focus,#mq [data-p].on{filter:drop-shadow(0 0 5px #ffc933)}
+.hmi{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;background:#10181f;border:4px solid var(--ink);border-radius:12px;padding:10px;margin:12px 0;color:#7CFC9A;font-family:"Courier New",monospace}.hmi b{display:block;font-size:.8rem;color:#9fd4ee}.hmi .v{font-size:1.15rem}.hmi button{background:#1e2a38;color:#7CFC9A;border:2px solid #7CFC9A;border-radius:8px;padding:2px 12px;font-family:inherit;font-size:1.1rem}
+.ped{background:#fff3c4}.ped .ph{font-weight:bold;letter-spacing:1px;border-bottom:3px dashed var(--steel);padding-bottom:6px;margin-bottom:8px}.who{display:flex;align-items:center;gap:10px}.who span{font-size:2.6rem}.bub{background:#fff;border:3px solid var(--ink);border-radius:16px;padding:8px 12px;font-size:1.05rem}
 .ticket{background:#fff;border:3px dashed var(--steel);border-radius:10px;padding:8px 12px;font-size:.95rem}
 .nav{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:14px}
 .st{background:var(--steel);color:#fff;border:4px solid var(--ink);border-radius:16px;padding:8px 2px;text-align:center;box-shadow:0 5px 0 var(--ink);font-size:.85rem}
@@ -56,63 +59,106 @@ const IT1=[["FLG-201","SAE 1020","2,0","O₂","1,2","0,8","-1,0","1,0"],["FLG-20
 function mk1(){const W="Passo fora de ordem. Revise o procedimento.";return[
  [ // 0 Segurança
   {t:"multi",h:"1. Vista os EPIs",p:"Selecione todos os EPIs exigidos para operar este laser.",it:[
-   ["🥽","Óculos para laser 1064 nm (OD 5+)",1],["🥽","Óculos para laser 532 nm (OD 5+)",0],["🥽","Óculos para laser CO₂ 10600 nm",0],["🕶️","Óculos de solda (filtro escuro)",0],["🧤","Luva de raspa",1],["🧤","Luva nitrílica",0],["🥾","Botina com biqueira",1],["👟","Tênis antiderrapante",0],["🎧","Protetor auricular tipo plug",1],["👷","Capacete",0],["🧥","Avental de PVC",0]],
+   ["🥽","Óculos para laser 1064 nm (OD 5+)",1],["🥽","Óculos para laser 532 nm (OD 5+)",0],["🥽","Óculos para laser CO₂ 10600 nm",0],["🕶️","Óculos de solda (filtro escuro)",0],["🧤","Luva de raspa",1],["🧤","Luva nitrílica",0],["🥾","Botina com biqueira",1],["👟","Tênis antiderrapante",0],["🎧","Protetor auricular tipo plug",1],["👷","Capacete",0],["🧥","Avental de PVC",0],["👕","Camisa de manga longa de algodão",1]],
    w:"Há EPIs errados ou faltando. Revise."},
   {t:"multi",h:"2. Inspecione a área",p:"Você chegou ao posto. Marque tudo o que impede iniciar a operação.",it:[
-   ["🧯","Extintor de água ao lado do painel elétrico",1],["🛑","Botão de emergência livre e testado",0],["🔬","Lente de proteção do cabeçote com marcas de queimado",1],["🚪","Intertravamento da porta testado no turno",0],["🟦","Cilindro de O₂ sem corrente de fixação",1],["🧱","Mesa de corte limpa, sem escória",0],["💡","Luz de aviso de laser ligado queimada",1],["🟨","Faixa de risco no piso visível",0],["💨","Filtro da exaustão saturado com alarme ativo",1],["🪟","Visor da cabine com filtro para 1064 nm",0],["🔹","Bico do cabeçote deformado",1],["🚪","Porta da cabine fechada e travada",0]],
+   ["🧯","Extintor de água ao lado do painel elétrico",1],["🛑","Botão de emergência livre e testado",0],["🔬","Lente de proteção do cabeçote com marcas de queimado",1],["🚪","Intertravamento da porta testado no turno",0],["🟦","Cilindro de O₂ sem corrente de fixação",1],["🧱","Mesa de corte limpa, sem escória",0],["💡","Luz de aviso de laser ligado queimada",1],["🟨","Faixa de risco no piso visível",0],["💨","Filtro da exaustão saturado com alarme ativo",1],["🪟","Visor da cabine com filtro para 1064 nm",0],["🔹","Bico do cabeçote limpo e centralizado",0],["🚪","Porta da cabine fechada e travada",0]],
    w:"A inspeção está incorreta. Revise."},
   {t:"seq",h:"3. Bloqueio de energia (troca de bico)",p:"Toque nos passos na ordem correta.",it:[
-   ["⏻","Desligar a máquina no painel",0],["🔒","Bloquear a chave geral com cadeado",1],["🏷️","Etiquetar com nome e data",2],["🧪","Testar ausência de energia",3]],w:W}],
+   ["⏻","Desligar a máquina no painel",0],["🔒","Bloquear a chave geral com cadeado",1],["🏷️","Etiquetar com nome e data",2],["💨","Despressurizar a linha de gás",3],["🧪","Testar ausência de energia",4]],w:W}],
  [ // 1 Máquina
-  {t:"one",h:"Separe a chapa",p:"Pegue no estoque a chapa da peça do pedido.",it:[["🟫","SAE 1020 – 3,0 mm",1],["🟫","SAE 1020 – 3,75 mm",0],["🟫","SAE 1020 – 2,0 mm",0],["🟫","SAE 1045 – 3,0 mm",0],["⬜","Inox 304 – 3,0 mm",0]],w:"Chapa não atende ao pedido."},
+  {t:"one",h:"Separe a chapa",p:"Pegue no estoque a chapa da peça do pedido ao lado.",it:[["🟫","SAE 1020 – 3,0 mm",1],["🟫","SAE 1020 – 3,75 mm",0],["🟫","SAE 1020 – 2,0 mm",0],["⬜","Inox 304 – 3,0 mm",0]],w:"Chapa não atende ao pedido."},
   {t:"one",h:"Monte o bico",p:"Escolha o bico do cabeçote para essa chapa.",it:[["🔹","Bico 1,2 mm",0],["🔹","Bico 1,5 mm",1],["🔷","Bico 1,8 mm",0],["🔷","Bico 2,0 mm",0]],w:"Bico não confere com a IT."},
   {t:"one",h:"Abra o gás",p:"Escolha o gás de assistência para essa chapa.",it:[["🟦","Oxigênio (O₂)",1],["🟩","Nitrogênio (N₂)",0],["💨","Ar comprimido",0],["⬜","Argônio",0]],w:"Gás não confere com a IT."}],
  [ // 2 Código
   {t:"seq",h:"Monte o programa de corte",p:"Toque nos passos na ordem da IT.",it:[
    ["📂","Carregar programa FLANGE_3MM",0],["📍","Definir origem da peça",1],["🟦","Abrir válvula de gás",2],["👀","Rodar simulação a seco",3],["▶️","Iniciar o corte",4]],w:W}],
  [ // 3 Ajuste (aço carbono 3,0: 0,7 bar ±0,1 / foco -1,5 ±0,5 / altura 1,0 ±0,2)
-  {t:"adj",h:"Ajuste o cabeçote",p:"Regule o cabeçote conforme a IT para essa chapa.",r:[
-   {k:"Pressão do gás",u:"bar",min:0,max:15,st:0.1,v:5,lo:0.6,hi:0.8},
-   {k:"Foco",u:"mm",min:-4,max:2,st:0.5,v:0,lo:-2,hi:-1},
-   {k:"Altura do bico",u:"mm",min:0.5,max:3,st:0.1,v:2.5,lo:0.8,hi:1.2}]}]
+  {t:"adj",h:"Ajuste o cabeçote",p:"Mexa nos controles da máquina (arraste, use a roda do mouse ou as setas do teclado) conforme a IT do pedido ao lado.",draw:drawLaser,r:[
+   {k:"Pressão do gás",u:"bar",min:0,max:15,st:0.1,v:5,lo:0.6,hi:0.8,ty:"d",cx:75,cy:85},
+   {k:"Foco",u:"mm",min:-4,max:2,st:0.5,v:0,lo:-2,hi:-1,ty:"v",y0:290,y1:230},
+   {k:"Altura do bico",u:"mm",min:0.5,max:3,st:0.1,v:2.5,lo:0.8,hi:1.2,ty:"v",y0:188,y1:153}]}]
 ]}
 
-function itHTML(){const t=LV[S.lv].it;return `<aside class="card itp"><h2>📖 ${t.t}</h2><p><small>${t.info}</small></p><div class="scroll"><table><tr>${t.head.map(c=>"<th>"+c+"</th>").join("")}</tr>${t.rows.map(r=>"<tr"+(r[0]==t.hl?' class="hl"':"")+">"+r.map(c=>"<td>"+c+"</td>").join("")+"</tr>").join("")}</table></div><p><small>${t.note}</small></p></aside>`}
+function itHTML(){const L=LV[S.lv],t=L.it,d=L.ped;return `<aside class="itp"><div class="card ped"><div class="ph">🧾 PEDIDO Nº ${d.n}</div><div class="who"><span>🧑‍🏭</span><div class="bub">Quero <b>${d.q}</b>, por favor!</div></div><small>Cliente: ${d.cli}</small></div><div class="card"><h2>📖 ${t.t}</h2><p><small>${t.info}</small></p><div class="scroll"><table><tr>${t.head.map(c=>"<th>"+c+"</th>").join("")}</tr>${t.rows.map(r=>"<tr"+(r[0]==t.hl?' class="hl"':"")+">"+r.map(c=>"<td>"+c+"</td>").join("")+"</tr>").join("")}</table></div><p><small>${t.note}</small></p></div></aside>`}
+
+/* ===== MODELOS 2D DAS MÁQUINAS (tela de Ajuste) ===== */
+const posY=r=>r.y0+(r.cur-r.min)/(r.max-r.min)*(r.y1-r.y0);
+const fv=r=>String(r.st<1?r.cur.toFixed(1):r.cur).replace(".",",")+" "+r.u;
+const G=(i,r,c,x)=>`<g data-p="${i}" tabindex="0" role="slider" aria-label="${r.k}" aria-valuemin="${r.min}" aria-valuemax="${r.max}" aria-valuenow="${r.cur}" style="cursor:${c}">${x}</g>`;
+const bub=(x,y,t)=>{const w=t.length*6.4+16;x=Math.max(w/2+4,Math.min(516-w/2,x));return `<g pointer-events="none"><rect x="${x-w/2}" y="${y-20}" width="${w}" height="22" rx="8" fill="#fff" stroke="#1e2a38" stroke-width="2"/><text x="${x}" y="${y-5}" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e2a38">${t}</text></g>`};
+function dialSVG(r,i){const a=(-135+(r.cur-r.min)/(r.max-r.min)*270)*Math.PI/180,R=40,P=(q,d)=>[r.cx+Math.sin(q)*d,r.cy-Math.cos(q)*d];let t="";
+ for(let k=0;k<=10;k++){const q=(-135+k*27)*Math.PI/180,u=P(q,R-2),w=P(q,R-(k%5?8:12));t+=`<line x1="${u[0]}" y1="${u[1]}" x2="${w[0]}" y2="${w[1]}" stroke="#1e2a38" stroke-width="2"/>`;
+  if(k%5==0){const l=P(q,R-21);t+=`<text x="${l[0]}" y="${l[1]+3}" text-anchor="middle" font-size="8" fill="#1e2a38">${+(r.min+(r.max-r.min)*k/10).toFixed(1)}</text>`}}
+ const n=P(a,R-14);
+ return G(i,r,"pointer",`<circle cx="${r.cx}" cy="${r.cy}" r="${R+5}" fill="#8a95a1" stroke="#1e2a38" stroke-width="3"/><circle cx="${r.cx}" cy="${r.cy}" r="${R}" fill="#fff" stroke="#1e2a38" stroke-width="2"/>${t}<line x1="${r.cx}" y1="${r.cy}" x2="${n[0]}" y2="${n[1]}" stroke="#e4412f" stroke-width="3" stroke-linecap="round"/><circle cx="${r.cx}" cy="${r.cy}" r="8" fill="#1e2a38"/>`)+`<text x="${r.cx}" y="${r.cy+R+17}" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e2a38">${r.k}</text><text x="${r.cx}" y="${r.cy+R+30}" text-anchor="middle" font-size="12" fill="#1e2a38">${fv(r)}</text>`}
+function drawLaser(R,act){const hy0=posY(R[2]),tip=hy0+55,hy=hy0-35,fy=posY(R[1]),p=R[0].cur,d=+(0.7-p/30).toFixed(2),ph=-((Date.now()/1000)%d).toFixed(2);let rl="",sl="";
+ for(let k=0;k<=6;k++)rl+=`<line x1="414" y1="${290-k*10}" x2="${k%2?424:428}" y2="${290-k*10}" stroke="#1e2a38" stroke-width="2"/>`;
+ for(let k=0;k<16;k++)sl+=`<polygon points="${112+k*25},270 ${137+k*25},270 ${124.5+k*25},282" fill="#6b7785"/>`;
+ const T=(x,y,t,c="#1e2a38",f=11)=>`<text x="${x}" y="${y}" text-anchor="middle" font-size="${f}" font-weight="bold" fill="${c}">${t}</text>`;
+ return `<rect x="0" y="282" width="520" height="18" fill="#8a95a1"/>${sl}<rect x="110" y="250" width="400" height="20" fill="#b9c2cc" stroke="#1e2a38" stroke-width="3"/>${T(470,264,"Chapa")}
+ <rect x="110" y="18" width="310" height="26" rx="4" fill="#4a5a6a" stroke="#1e2a38" stroke-width="3"/><rect x="215" y="44" width="70" height="22" fill="#6b7785" stroke="#1e2a38" stroke-width="3"/><rect x="243" y="66" width="14" height="${hy-66}" fill="#8a95a1" stroke="#1e2a38" stroke-width="2"/>
+ <path d="M115 31 C175 31 175 ${hy-10} 225 ${hy+10}" fill="none" stroke="#e0a31a" stroke-width="6"/>
+ <rect x="42" y="190" width="66" height="92" rx="14" fill="#4a90d9" stroke="#1e2a38" stroke-width="3"/><rect x="52" y="200" width="8" height="70" rx="4" fill="#fff" fill-opacity=".35"/>${T(80,248,"O₂","#fff",16)}<rect x="62" y="162" width="26" height="28" rx="4" fill="#8a95a1" stroke="#1e2a38" stroke-width="3"/><rect x="70" y="150" width="10" height="14" fill="#1e2a38"/>
+ <path d="M88 176 H165 V${hy+30} H225" fill="none" stroke="#1e2a38" stroke-width="5"/>
+ <g pointer-events="none"><line x1="250" y1="${tip+2}" x2="250" y2="248" stroke="#4a90d9" stroke-width="${1+p/4}" stroke-dasharray="3 4" stroke-opacity="${(.25+p/20).toFixed(2)}"><animate attributeName="stroke-dashoffset" from="0" to="-7" dur="${d}s" begin="${ph}s" repeatCount="indefinite"/></line><line x1="${244-p*3}" y1="247" x2="${256+p*3}" y2="247" stroke="#4a90d9" stroke-width="2" stroke-dasharray="3 4" stroke-opacity="${(.25+p/20).toFixed(2)}"/></g>
+ ${G(2,R[2],"ns-resize",`<rect x="222" y="${hy}" width="56" height="45" rx="6" fill="#2b4a6f" stroke="#1e2a38" stroke-width="3"/><rect x="228" y="${hy+45}" width="44" height="25" fill="#6b7785" stroke="#1e2a38" stroke-width="3"/><rect x="232" y="${hy+8}" width="36" height="24" rx="4" fill="#dfeaf2" stroke="#1e2a38" stroke-width="2"/><ellipse cx="250" cy="${hy+22}" rx="14" ry="5" fill="#9fd4ee" stroke="#1e2a38" stroke-width="2"/><polygon points="228,${hy+70} 272,${hy+70} 257,${tip} 243,${tip}" fill="#8a95a1" stroke="#1e2a38" stroke-width="3"/><text x="302" y="${hy+30}" text-anchor="middle" font-size="14" fill="#1e2a38">▲▼</text>`)}
+ <line x1="324" y1="${tip}" x2="324" y2="250" stroke="#e4412f" stroke-width="3"/><line x1="318" y1="${tip}" x2="330" y2="${tip}" stroke="#e4412f" stroke-width="2"/><line x1="318" y1="250" x2="330" y2="250" stroke="#e4412f" stroke-width="2"/>${T(342,(tip+250)/2+4,"altura","#1e2a38",10)}
+ <line x1="420" y1="230" x2="420" y2="290" stroke="#1e2a38" stroke-width="3"/>${rl}${T(444,254,"0","#1e2a38",9)}${T(444,234,"+2","#1e2a38",9)}${T(444,292,"-4","#1e2a38",9)}${T(455,222,"Foco")}
+ ${G(1,R[1],"ns-resize",`<polygon points="228,${hy+34} 272,${hy+34} 250,${fy}" fill="#e4412f" fill-opacity=".45" stroke="#e4412f" stroke-width="2" pointer-events="none"/><line x1="254" y1="${fy}" x2="406" y2="${fy}" stroke="#e4412f" stroke-width="2" stroke-dasharray="5 4" pointer-events="none"/><circle cx="250" cy="${fy}" r="8" fill="#ffc933" stroke="#1e2a38" stroke-width="3"/><polygon points="418,${fy} 436,${fy-10} 436,${fy+10}" fill="#ffc933" stroke="#1e2a38" stroke-width="3"/>`)}
+ <rect x="425" y="24" width="88" height="66" rx="6" fill="#10181f" stroke="#1e2a38" stroke-width="3"/><text x="431" y="38" font-size="9" fill="#9fd4ee" font-family="monospace">CNC LASER</text><text x="431" y="54" font-size="10" fill="#7CFC9A" font-family="monospace">G ${fv(R[0])}</text><text x="431" y="68" font-size="10" fill="#7CFC9A" font-family="monospace">F ${fv(R[1])}</text><text x="431" y="82" font-size="10" fill="#7CFC9A" font-family="monospace">H ${fv(R[2])}</text>
+ ${dialSVG(R[0],0)}${act===0?bub(75,34,R[0].k+": "+fv(R[0])):""}${act===2?bub(302,hy-8,R[2].k+": "+fv(R[2])):""}${act===1?bub(440,fy-18,R[1].k+": "+fv(R[1])):""}`}
+function drawPress(R,act){const yc=posY(R[1]),yb=yc+20,d=+(60/R[2].cur).toFixed(2),ph=-((Date.now()/1000)%d).toFixed(2);let sk="",cl="",lc="";
+ for(let k=0;k<6;k++){const q=k*Math.PI/3;sk+=`<line x1="75" y1="42" x2="${75+Math.sin(q)*26}" y2="${42-Math.cos(q)*26}" stroke="#1e2a38" stroke-width="4"/>`}
+ for(let k=0;k<7;k++){cl+=`<circle cx="161" cy="${118+k*19}" r="2.5" fill="#e4412f"/><circle cx="359" cy="${118+k*19}" r="2.5" fill="#e4412f"/>`}
+ [[105,"220"],[135,"205"],[165,"190"]].forEach(a=>{lc+=`<line x1="108" y1="${a[0]}" x2="116" y2="${a[0]}" stroke="#1e2a38" stroke-width="2"/><text x="92" y="${a[0]+4}" text-anchor="end" font-size="9" fill="#1e2a38">${a[1]}</text>`});
+ const T=(x,y,t,c="#1e2a38",f=11)=>`<text x="${x}" y="${y}" text-anchor="middle" font-size="${f}" font-weight="bold" fill="${c}">${t}</text>`;
+ return `<rect x="0" y="285" width="520" height="15" fill="#8a95a1"/>
+ <rect x="120" y="40" width="24" height="245" fill="#4a5a6a" stroke="#1e2a38" stroke-width="3"/><rect x="376" y="40" width="24" height="245" fill="#4a5a6a" stroke="#1e2a38" stroke-width="3"/>
+ <rect x="110" y="20" width="300" height="40" rx="6" fill="#2b4a6f" stroke="#1e2a38" stroke-width="3"/><rect x="100" y="36" width="14" height="12" fill="#1e2a38"/>
+ <circle cx="75" cy="42" r="30" fill="#8a95a1" stroke="#1e2a38" stroke-width="4"/><g>${sk}<circle cx="75" cy="20" r="4" fill="#e4412f"/><animateTransform attributeName="transform" type="rotate" from="0 75 42" to="360 75 42" dur="${d}s" begin="${ph}s" repeatCount="indefinite"/></g><circle cx="75" cy="42" r="8" fill="#1e2a38"/>${T(75,84,"Volante","#1e2a38",10)}
+ <rect x="130" y="250" width="260" height="35" fill="#2b4a6f" stroke="#1e2a38" stroke-width="3"/><rect x="180" y="225" width="160" height="25" fill="#8a95a1" stroke="#1e2a38" stroke-width="3"/><rect x="165" y="219" width="190" height="6" fill="#b9c2cc" stroke="#1e2a38" stroke-width="2"/>${T(260,242,"Matriz","#1e2a38",10)}
+ <rect x="158" y="110" width="6" height="140" fill="#4a5a6a"/><rect x="356" y="110" width="6" height="140" fill="#4a5a6a"/>${cl}
+ <rect x="250" y="60" width="20" height="${yb-100}" fill="#1e2a38"/>
+ <line x1="108" y1="105" x2="108" y2="165" stroke="#1e2a38" stroke-width="3"/>${lc}<polygon points="98,${yc-7} 98,${yc+7} 110,${yc}" fill="#e4412f" stroke="#1e2a38" stroke-width="2"/>
+ ${G(1,R[1],"ns-resize",`<rect x="150" y="${yb-40}" width="220" height="40" rx="6" fill="#e4412f" stroke="#1e2a38" stroke-width="3"/><rect x="144" y="${yb-40}" width="6" height="40" fill="#1e2a38"/><rect x="370" y="${yb-40}" width="6" height="40" fill="#1e2a38"/><rect x="190" y="${yb}" width="140" height="10" fill="#4a5a6a" stroke="#1e2a38" stroke-width="2"/><rect x="225" y="${yb+10}" width="70" height="14" fill="#8a95a1" stroke="#1e2a38" stroke-width="3"/><text x="260" y="${yb-14}" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">Martelo ▲▼</text>`)}
+ <rect x="414" y="54" width="104" height="244" rx="8" fill="#dfe6ec" stroke="#1e2a38" stroke-width="3"/>${dialSVG(R[2],2)}${dialSVG(R[0],0)}
+ ${act===0?bub(466,44,R[0].k+": "+fv(R[0])):""}${act===2?bub(466,44,R[2].k+": "+fv(R[2])):""}${act===1?bub(60,yc-12,R[1].k+": "+fv(R[1])):""}`}
 
 /* ===== PRENSA (EXEMPLO: trocar pelos dados reais da IT da prensa) ===== */
 const IT2=[["SUP-110","SAE 1010","1,5","MT-11","Óleo leve","25","210","40"],["SUP-120","SAE 1010","2,0","MT-12","Óleo leve","40","205","30"],["SUP-130","SAE 1020","3,0","MT-13","Óleo pesado","65","198","20"],["SUP-140","Inox 304","2,0","MT-14","Óleo EP","55","200","25"]];
 function mk2(){const W="Passo fora de ordem. Revise o procedimento.";return[
  [ // 0 Segurança
   {t:"multi",h:"1. Vista os EPIs",p:"Selecione todos os EPIs exigidos para operar esta prensa.",it:[
-   ["🥽","Óculos de segurança com proteção lateral",1],["🥽","Óculos de segurança sem proteção lateral",0],["🕶️","Óculos de solda (filtro escuro)",0],["🧤","Luva de raspa de punho curto",1],["🧤","Luva de tecido de punho longo",0],["🥾","Botina com biqueira de aço",1],["👞","Sapato de couro sem biqueira",0],["🎧","Protetor auricular tipo concha",1],["👷","Capacete",0],["⌚","Relógio e pulseira",0],["🧥","Avental de PVC",0]],
+   ["🥽","Óculos de segurança com proteção lateral",1],["🥽","Óculos de segurança sem proteção lateral",0],["🕶️","Óculos de solda (filtro escuro)",0],["🧤","Luva de raspa de punho curto",1],["🧤","Luva de tecido de punho longo",0],["🥾","Botina com biqueira de aço",1],["👞","Sapato de couro sem biqueira",0],["🎧","Protetor auricular tipo concha",1],["👷","Capacete",0],["⌚","Relógio e pulseira",0],["🧥","Avental de PVC",0],["👕","Camisa de manga longa abotoada no punho",1]],
    w:"Há EPIs errados ou faltando. Revise."},
   {t:"multi",h:"2. Inspecione a área",p:"Você chegou ao posto. Marque tudo o que impede iniciar a operação.",it:[
-   ["⚙️","Protetor do volante instalado com apenas 2 dos 4 parafusos",1],["🛡️","Cortina de luz alinhada e testada no turno",0],["🖐️","Botão direito do bimanual travado com um pedaço de madeira",1],["🛢️","Lubrificação no nível, sem vazamento",0],["🛑","Botão de emergência que não trava ao ser pressionado",1],["🔌","Painel elétrico fechado, sem fios expostos",0],["🟨","Poça de óleo no piso em frente ao operador",1],["🗑️","Área limpa, sem sucata no acesso à saída",0],["🔩","Grampos de fixação da matriz folgados",1],["⚠️","Sinalização de zona de risco visível ao redor da prensa",0],["🦶","Pedal de acionamento sem proteção, além do bimanual",1],["📋","Registro do teste de tempo de parada vencido há 2 meses",1]],
+   ["⚙️","Protetor do volante instalado com apenas 2 dos 4 parafusos",1],["🛡️","Cortina de luz alinhada e testada no turno",0],["🖐️","Botão direito do bimanual travado com um pedaço de madeira",1],["🛢️","Lubrificação no nível, sem vazamento",0],["🛑","Botão de emergência que não trava ao ser pressionado",1],["🔌","Painel elétrico fechado, sem fios expostos",0],["🟨","Poça de óleo no piso em frente ao operador",1],["🗑️","Área limpa, sem sucata no acesso à saída",0],["🔩","Grampos de fixação da matriz folgados",1],["⚠️","Sinalização de zona de risco visível ao redor da prensa",0],["🦶","Pedal de acionamento protegido e fora de uso",0],["📋","Registro do teste de tempo de parada dentro do prazo",0]],
    w:"A inspeção está incorreta. Revise."},
   {t:"seq",h:"3. Bloqueio de energia (troca de matriz)",p:"Toque nos passos na ordem correta.",it:[
    ["⏻","Desligar o motor principal no painel",0],["🔒","Bloquear a chave geral com cadeado",1],["🏷️","Etiquetar com nome e data",2],["🌀","Aliviar a energia residual (volante parado)",3],["🧪","Testar ausência de energia",4]],w:W}],
  [ // 1 Ferramenta
-  {t:"one",h:"Separe a chapa",p:"Pegue no estoque a chapa da peça do pedido.",it:[["🟫","SAE 1010 – 2,0 mm",1],["🟫","SAE 1010 – 1,5 mm",0],["🟫","SAE 1020 – 2,0 mm",0],["🟫","SAE 1020 – 3,0 mm",0],["⬜","Inox 304 – 2,0 mm",0]],w:"Chapa não atende ao pedido."},
-  {t:"one",h:"Escolha a matriz",p:"Pegue a matriz da peça do pedido.",it:[["🧰","MT-11",0],["🧰","MT-12",1],["🧰","MT-13",0],["🧰","MT-14",0]],w:"Matriz não confere com a IT."},
+  {t:"one",h:"Separe a chapa",p:"Pegue no estoque a chapa da peça do pedido ao lado.",it:[["🟫","SAE 1010 – 2,0 mm",1],["🟫","SAE 1010 – 1,5 mm",0],["🟫","SAE 1020 – 2,0 mm",0],["⬜","Inox 304 – 2,0 mm",0]],w:"Chapa não atende ao pedido."},
+  {t:"one",h:"Escolha a matriz",p:"Pegue a matriz da peça do pedido ao lado.",it:[["🧰","MT-11",0],["🧰","MT-12",1],["🧰","MT-13",0],["🧰","MT-14",0]],w:"Matriz não confere com a IT."},
   {t:"one",h:"Lubrifique a chapa",p:"Escolha o lubrificante.",it:[["🛢️","Óleo leve",1],["🛢️","Óleo pesado",0],["🛢️","Óleo EP",0],["🚫","Sem lubrificante",0]],w:"Lubrificante não confere com a IT."}],
  [ // 2 Montagem
   {t:"seq",h:"Monte a matriz e prepare a partida",p:"Toque nos passos na ordem da IT.",it:[
    ["🧱","Posicionar a matriz na mesa",0],["🎯","Centralizar a matriz sob o martelo",1],["🔩","Apertar os grampos de fixação",2],["🖐️","Testar bimanual e cortina de luz",3],["🧪","Golpe de teste com sucata",4]],w:W}],
  [ // 3 Ajuste (SUP-120: 40 t ±2 / 205 mm ±1 / 30 golpes/min ±2)
-  {t:"adj",h:"Ajuste a prensa",p:"Regule a prensa conforme a IT para a peça do pedido.",r:[
-   {k:"Força",u:"t",min:10,max:80,st:1,v:20,lo:38,hi:42},
-   {k:"Altura de fechamento",u:"mm",min:190,max:220,st:1,v:215,lo:204,hi:206},
-   {k:"Golpes por minuto",u:"golpes/min",min:10,max:60,st:1,v:45,lo:28,hi:32}]}]
+  {t:"adj",h:"Ajuste a prensa",p:"Mexa nos controles da máquina (arraste, use a roda do mouse ou as setas do teclado) conforme a IT do pedido ao lado.",draw:drawPress,r:[
+   {k:"Força",u:"t",min:10,max:80,st:1,v:20,lo:38,hi:42,ty:"d",cx:466,cy:218},
+   {k:"Altura de fechamento",u:"mm",min:190,max:220,st:1,v:215,lo:204,hi:206,ty:"v",y0:165,y1:105},
+   {k:"Golpes por minuto",u:"golpes/min",min:10,max:60,st:1,v:45,lo:28,hi:32,ty:"d",cx:466,cy:105}]}]
 ]}
 
 const LV=[
-{ic:"🔥",nome:"Laser industrial – flange",ticket:"Pedido: 10× FLG-203",mk:mk1,
+{ic:"🔥",nome:"Laser industrial – flange",ped:{n:"07",cli:"Setor de Montagem",q:"10× FLG-203"},mk:mk1,
  st:[["🦺","Segurança"],["🔧","Máquina"],["💻","Código"],["🎚️","Ajuste"],["🔥","Cortar"]],
  it:{t:"IT-LASER-001",info:"Laser de fibra 3 kW, 1064 nm. Potência e velocidade vêm do programa; não ajustar.",head:["Peça","Material","Esp.","Gás","Bico","Pressão","Foco","Altura"],rows:IT1,hl:"FLG-203",note:"Esp., bico, foco e altura em mm; pressão em bar. Tolerâncias: pressão ±0,1 bar, foco ±0,5 mm, altura ±0,2 mm."},
  fin:{h:"Cortar a peça",msg:"🔥 Cortando a peça...",
   svg:`<svg viewBox="0 0 300 160" width="100%" style="max-height:240px;background:#6b7785;border:4px solid var(--ink);border-radius:16px"><rect x="30" y="20" width="240" height="120" fill="#b9c2cc" stroke="#1e2a38" stroke-width="3"/><circle id="p1" cx="150" cy="80" r="50" fill="none" stroke="#e4412f" stroke-width="3" stroke-dasharray="315" stroke-dashoffset="315"/><circle id="p2" cx="150" cy="80" r="14" fill="none" stroke="#e4412f" stroke-width="3" stroke-dasharray="90" stroke-dashoffset="90"/></svg>`,
   anim:d=>{let k=0;const a=$("#p1"),b=$("#p2");const iv=setInterval(()=>{k+=2;b.style.strokeDashoffset=Math.max(0,90-k*2);a.style.strokeDashoffset=Math.max(0,315-Math.max(0,k-45)*4);if(k>=125){clearInterval(iv);d()}},40)}}},
-{ic:"🔨",nome:"Prensa industrial – suporte",ticket:"Pedido: 10× SUP-120",mk:mk2,
+{ic:"🔨",nome:"Prensa industrial – suporte",ped:{n:"12",cli:"Setor de Soldagem",q:"10× SUP-120"},mk:mk2,
  st:[["🦺","Segurança"],["🧰","Ferramenta"],["📋","Montagem"],["🎚️","Ajuste"],["🔨","Prensar"]],
  it:{t:"IT-PRENSA-001",info:"Prensa excêntrica 80 t, comando bimanual e cortina de luz. Peças em chapa dobrada.",head:["Peça","Material","Esp.","Matriz","Lubrif.","Força","Altura","Golpes"],rows:IT2,hl:"SUP-120",note:"Esp. e altura de fechamento em mm; força em t; golpes por minuto. Tolerâncias: força ±2 t, altura ±1 mm, golpes ±2."},
  fin:{h:"Prensar a peça",msg:"🔨 Prensando a peça...",
@@ -156,7 +202,7 @@ const load=()=>{try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){
 
 function start(){
   A.innerHTML=`<div class="card"><h1>🔥 Laser Training</h1><p>Treinamento de operadores.</p>
-  <p>Treino de 5 a 15 minutos.</p>
+  <p>Treino de 5 a 15 minutos.</p><p><small>Versão 1.1</small></p>
   <label>Nome do operador (só no modo teste)<input id="nm" autocomplete="off"></label><label>Matrícula<input id="mt" autocomplete="off"></label>
   <button class="btn" id="go">▶ Começar</button></div>`;
   $("#go").onclick=async()=>{let nome=$("#nm").value.trim();const mat=$("#mt").value.trim();
@@ -178,7 +224,7 @@ function game(){
   const s=S,unlocked=i=>i==0||(i<4?s.dn[0]:s.dn[0]&&s.dn[1]&&s.dn[2]&&s.dn[3]);
   const nav=LV[s.lv].st.map((x,i)=>`<button class="st ${i==s.cur?"on":s.dn[i]?"ok":""} ${unlocked(i)?"":"lock"}" data-i="${i}"><b>${s.dn[i]?"✅":x[0]}</b>${x[1]}</button>`).join("");
   A.innerHTML=`<div class="card top"><div><b>${s.nome}</b> · ${LV[s.lv].nome} · <span id="tm">${fmt((Date.now()-s.t0)/1000|0)}</span></div>
-  <div class="ticket">🎫 ${LV[s.lv].ticket}</div></div>
+  </div>
   <div class="lay"><div><div class="nav">${nav}</div><div class="card" id="stage"></div></div>${itHTML()}</div>`;
   A.querySelectorAll(".st").forEach(b=>b.onclick=()=>{const i=+b.dataset.i;
     if(!unlocked(i))return toast(i==0?"":s.dn[0]?"Termine as estações anteriores.":"Conclua a Segurança primeiro.",0);s.cur=i;game()});
@@ -194,17 +240,32 @@ function stage(){
   const g=s.D[c][s.sg[c]];if(!g)return;
   let h=`<h2>${g.h}</h2><p>${g.p}</p>`;
   if(g.t=="adj"){
-    h+=g.r.map((r,i)=>`<div class="sl"><label><span>${r.k}</span><b id="v${i}"></b></label><input type="range" id="r${i}" min="${r.min}" max="${r.max}" step="${r.st}" value="${r.v}"></div>`).join("")+`<button class="btn" id="ok">✔ Confirmar ajuste</button>`;
-    el.innerHTML=h;
-    const upd=()=>g.r.forEach((r,i)=>$("#v"+i).textContent=$("#r"+i).value+" "+r.u);
-    el.querySelectorAll("input").forEach(x=>x.oninput=upd);upd();
-    $("#ok").onclick=()=>{let n=0;g.r.forEach((r,i)=>{const v=+$("#r"+i).value;if(v<r.lo||v>r.hi)n++});
-      s.tries+=3;s.wrong+=n;err(3,n);if(n)toast(n+" parâmetro(s) fora do especificado. Consulte a IT.",0);else{toast("Ajuste correto!",1);adv()}};
+    g.r.forEach(r=>{if(r.cur==null)r.cur=r.v});
+    el.innerHTML=h+`<svg id="mq" viewBox="0 0 520 300" width="100%" style="touch-action:none;display:block;background:#e9eff3;border:4px solid var(--ink);border-radius:16px"></svg><div id="ar" class="hmi"></div><button class="btn" id="ok">✔ Confirmar ajuste</button>`;
+    const sv=$("#mq");let ac=null;
+    const pt=e=>{const b=sv.getBoundingClientRect();return[(e.clientX-b.left)/b.width*520,(e.clientY-b.top)/b.height*300]};
+    const rd=()=>{sv.innerHTML=g.draw(g.r,ac!=null?ac:g.foc);
+      if(ac==null&&g.foc!=null){const q=sv.querySelector('[data-p="'+g.foc+'"]');if(q)q.focus()}
+      $("#ar").innerHTML=g.r.map((r,i)=>`<div><b>${r.k}</b><span class="v"><button data-i="${i}" data-d="-1">−</button> ${fv(r)} <button data-i="${i}" data-d="1">+</button></span></div>`).join("");
+      $("#ar").querySelectorAll("button").forEach(b=>b.onclick=()=>{const r=g.r[+b.dataset.i];g.foc=null;setv(+b.dataset.i,r.cur+b.dataset.d*r.st)})};
+    const setv=(i,v)=>{const r=g.r[i];v=Math.max(r.min,Math.min(r.max,Math.round((v-r.min)/r.st)*r.st+r.min));r.cur=+v.toFixed(2);rd()};
+    const mv=e=>{const[x,y]=pt(e),r=g.r[ac];let v;
+      if(r.ty=="d"){const a=Math.max(-135,Math.min(135,Math.atan2(x-r.cx,r.cy-y)*180/Math.PI));v=r.min+(a+135)/270*(r.max-r.min)}
+      else v=r.min+(y-(r.off||0)-r.y0)/(r.y1-r.y0)*(r.max-r.min);
+      setv(ac,v)};
+    sv.onpointerdown=e=>{const t=e.target.closest("[data-p]");if(!t)return;ac=+t.dataset.p;g.foc=null;const r=g.r[ac];if(r.ty=="v")r.off=pt(e)[1]-posY(r);sv.setPointerCapture(e.pointerId);mv(e)};
+    sv.onpointermove=e=>{if(ac!=null)mv(e)};
+    sv.onpointerup=sv.onpointercancel=()=>{ac=null;rd()};
+    sv.addEventListener("wheel",e=>{const t=e.target.closest("[data-p]");if(!t)return;e.preventDefault();const i=+t.dataset.p;g.foc=i;setv(i,g.r[i].cur+(e.deltaY<0?1:-1)*g.r[i].st)},{passive:false});
+    sv.onkeydown=e=>{const t=e.target.closest("[data-p]"),d={ArrowUp:1,ArrowRight:1,ArrowDown:-1,ArrowLeft:-1}[e.key];if(!t||!d)return;e.preventDefault();const i=+t.dataset.p;g.foc=i;setv(i,g.r[i].cur+d*g.r[i].st)};
+    rd();
+    $("#ok").onclick=()=>{let n=0;g.r.forEach(r=>{if(r.cur<r.lo||r.cur>r.hi)n++});s.tries+=3;s.wrong+=n;err(3,n);if(n)toast(n+" parâmetro(s) fora do especificado. Consulte a IT.",0);else{toast("Ajuste correto!",1);adv()}};
     return}
   if(!g.sh)g.sh=shuffle(g.it.map((x,i)=>i));
   g.sel=g.sel||{};g.shown=g.shown||{};g.nx=g.nx||0;
+  const cnt=()=>g.t=="multi"?`<p>Selecione <b>${g.it.filter(x=>x[2]).length}</b> itens. Selecionados: <b>${g.it.filter((x,i)=>g.sel[i]).length}</b>/${g.it.filter(x=>x[2]).length}</p>`:g.t=="one"?`<p>Escolha <b>1</b> de ${g.it.length} opções.</p>`:`<p>Ordene os <b>${g.it.length}</b> passos. Feitos: <b>${g.nx}</b>/${g.it.length}</p>`;
   const draw=()=>{
-    el.innerHTML=h+`<div class="grid">`+(g.t=="seq"?g.sh:g.it.map((x,i)=>i)).map(i=>{const x=g.it[i];
+    el.innerHTML=h+cnt()+`<div class="grid">`+(g.t=="seq"?g.sh:g.it.map((x,i)=>i)).map(i=>{const x=g.it[i];
       const dn=g.t=="seq"&&x[2]<g.nx;
       return `<div class="cell"><button class="it ${g.sel[i]?"sel":""} ${dn?"done":""}" data-i="${i}"><i>${x[0]}</i>${x[1]}${dn?`<br><span class="n">${x[2]+1}</span>`:""}</button>${x[3]?`<button class="dtb" data-i="${i}">🔍 ${g.shown[i]?"Ocultar":"Ver detalhe"}</button>`:""}${x[3]&&g.shown[i]?`<div class="dtx">${x[3]}</div>`:""}</div>`}).join("")+`</div>`+(g.t=="multi"?`<button class="btn" id="ok">✔ Confirmar</button>`:"");
     el.querySelectorAll(".it").forEach(b=>b.onclick=()=>click(+b.dataset.i));
@@ -215,7 +276,7 @@ function stage(){
     if(g.t=="multi"){g.sel[i]=!g.sel[i];draw()}
     else if(g.t=="one"){s.tries++;if(x[2]){toast("Correto!",1);adv()}else{s.wrong++;err(c);toast(g.w,0)}}
     else{if(x[2]<g.nx)return;s.tries++;s.sq++;if(x[2]==g.nx){g.nx++;s.sqOk++;if(g.nx==g.it.length){toast("Sequência correta!",1);adv()}else draw()}else{s.wrong++;err(c);toast(g.w,0)}}};
-  const confirm_=()=>{let n=0;g.it.forEach((x,i)=>{if(!!g.sel[i]!=!!x[2])n++});s.tries+=g.it.length;s.wrong+=n;err(c,n);
+  const confirm_=()=>{const sl=g.it.filter((x,i)=>g.sel[i]).length,nd=g.it.filter(x=>x[2]).length;if(sl!=nd)return toast("Selecione exatamente "+nd+" itens.",0);let n=0;g.it.forEach((x,i)=>{if(!!g.sel[i]!=!!x[2])n++});s.tries+=g.it.length;s.wrong+=n;err(c,n);
     if(n)toast(g.w,0);else{toast("Tudo certo!",1);adv()}};
   draw();
 }

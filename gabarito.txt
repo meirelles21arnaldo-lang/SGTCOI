@@ -1,0 +1,110 @@
+Dados de EXEMPLO: trocar pelos valores reais das ITs.
+Pontuação: 60% acertos + 20% sequência da IT + 20% tempo (meta 10 min),
+menos 2 pontos por erro (4 pontos por erro de segurança). Aprovado com 70 ou mais.
+Padrão das telas: seleção com 12 itens e 5 corretos; escolha única com 4 opções;
+sequências com 5 passos. A última estação (corte ou prensagem) roda sozinha.
+
+==================================================
+LASER INDUSTRIAL: FLANGE (Pedido nº 07: 10x FLG-203)
+==================================================
+
+ESTAÇÃO 1 - SEGURANÇA
+
+1. EPIs (marcar 5):
+   - Óculos para laser 1064 nm (OD 5+)
+   - Luva de raspa
+   - Botina com biqueira
+   - Protetor auricular tipo plug
+   - Camisa de manga longa de algodão
+   NÃO marcar: óculos 532 nm, óculos CO2 10600 nm, óculos de solda, luva nitrílica,
+   tênis antiderrapante, capacete, avental de PVC.
+
+2. Inspeção (marcar 5 irregulares):
+   - Extintor de água ao lado do painel elétrico
+   - Lente de proteção do cabeçote com marcas de queimado
+   - Cilindro de O2 sem corrente de fixação
+   - Luz de aviso de laser ligado queimada
+   - Filtro da exaustão saturado com alarme ativo
+   NÃO marcar: botão de emergência livre e testado, intertravamento da porta testado,
+   mesa de corte limpa, faixa de risco visível, visor com filtro para 1064 nm, bico do
+   cabeçote limpo e centralizado, porta da cabine fechada e travada.
+
+3. Bloqueio de energia, nesta ordem:
+   1) Desligar a máquina no painel
+   2) Bloquear a chave geral com cadeado
+   3) Etiquetar com nome e data
+   4) Despressurizar a linha de gás
+   5) Testar ausência de energia
+
+ESTAÇÃO 2 - MÁQUINA (linha FLG-203 da IT)
+   - Chapa: SAE 1020 - 3,0 mm
+   - Bico: 1,5 mm
+   - Gás: Oxigênio (O2)
+
+ESTAÇÃO 3 - CÓDIGO, nesta ordem:
+   1) Carregar programa FLANGE_3MM
+   2) Definir origem da peça
+   3) Abrir válvula de gás
+   4) Rodar simulação a seco
+   5) Iniciar o corte
+
+ESTAÇÃO 4 - AJUSTE (modelo 2D do laser: arrastar, roda do mouse, setas ou botões - e +)
+   Controle na máquina                       | Valor da IT | Faixa aceita
+   Pressão do gás (botão do regulador do O2) | 0,7 bar     | 0,6 a 0,8 bar
+   Foco (ponto focal do feixe ou régua)      | -1,5 mm     | -2,0 a -1,0 mm
+   Altura do bico (o próprio cabeçote)       | 1,0 mm      | 0,8 a 1,2 mm
+
+ESTAÇÃO 5 - CORTAR: automática.
+
+
+==================================================
+PRENSA INDUSTRIAL: SUPORTE (Pedido nº 12: 10x SUP-120)
+==================================================
+
+ESTAÇÃO 1 - SEGURANÇA
+
+1. EPIs (marcar 5):
+   - Óculos de segurança com proteção lateral
+   - Luva de raspa de punho curto
+   - Botina com biqueira de aço
+   - Protetor auricular tipo concha
+   - Camisa de manga longa abotoada no punho
+   NÃO marcar: óculos sem proteção lateral, óculos de solda, luva de tecido de punho
+   longo, sapato de couro sem biqueira, capacete, relógio e pulseira, avental de PVC.
+
+2. Inspeção (marcar 5 irregulares):
+   - Protetor do volante instalado com apenas 2 dos 4 parafusos
+   - Botão direito do bimanual travado com um pedaço de madeira
+   - Botão de emergência que não trava ao ser pressionado
+   - Poça de óleo no piso em frente ao operador
+   - Grampos de fixação da matriz folgados
+   NÃO marcar: cortina de luz alinhada e testada, lubrificação no nível, painel elétrico
+   fechado, área limpa sem sucata, sinalização de zona de risco visível, pedal de
+   acionamento protegido e fora de uso, registro do teste de tempo de parada dentro do prazo.
+
+3. Bloqueio de energia (troca de matriz), nesta ordem:
+   1) Desligar o motor principal no painel
+   2) Bloquear a chave geral com cadeado
+   3) Etiquetar com nome e data
+   4) Aliviar a energia residual (volante parado)
+   5) Testar ausência de energia
+
+ESTAÇÃO 2 - FERRAMENTA (linha SUP-120 da IT)
+   - Chapa: SAE 1010 - 2,0 mm
+   - Matriz: MT-12
+   - Lubrificante: Óleo leve
+
+ESTAÇÃO 3 - MONTAGEM, nesta ordem:
+   1) Posicionar a matriz na mesa
+   2) Centralizar a matriz sob o martelo
+   3) Apertar os grampos de fixação
+   4) Testar bimanual e cortina de luz
+   5) Golpe de teste com sucata
+
+ESTAÇÃO 4 - AJUSTE (modelo 2D da prensa: arrastar, roda do mouse, setas ou botões - e +)
+   Controle na máquina                          | Valor da IT | Faixa aceita
+   Força (botão de baixo do painel)             | 40 t        | 38 a 42 t
+   Altura de fechamento (o martelo)             | 205 mm      | 204 a 206 mm
+   Golpes por minuto (botão de cima do painel)  | 30          | 28 a 32
+
+ESTAÇÃO 5 - PRENSAR: automática.
