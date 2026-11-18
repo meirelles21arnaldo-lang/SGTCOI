@@ -15,12 +15,21 @@ ESTAÇÃO 1 - SEGURANÇA
    - Luva de raspa
    - Botina com biqueira
    - Protetor auricular tipo plug
-   - Camisa de manga longa de algodão
+   - Jaleco
    NÃO marcar: óculos 532 nm, óculos CO2 10600 nm, óculos de solda, luva nitrílica,
    tênis antiderrapante, capacete, avental de PVC.
 
-2. Inspeção (marcar 5 irregulares):
-   - Extintor de água ao lado do painel elétrico
+2. EPCs (marcar 5):
+   - Cabine enclausurada com visor para 1064 nm
+   - Intertravamento da porta da cabine
+   - Botão de parada de emergência
+   - Sistema de exaustão de fumos
+   - Sinalização e faixa de risco no piso
+   NÃO marcar (são EPIs ou outros): óculos para laser, luva de raspa, protetor auricular,
+   botina, jaleco, máscara PFF2, capacete.
+
+3. Inspeção (marcar 5 irregulares):
+   - Extintor de água ao lado da máquina
    - Lente de proteção do cabeçote com marcas de queimado
    - Cilindro de O2 sem corrente de fixação
    - Luz de aviso de laser ligado queimada
@@ -29,32 +38,58 @@ ESTAÇÃO 1 - SEGURANÇA
    mesa de corte limpa, faixa de risco visível, visor com filtro para 1064 nm, bico do
    cabeçote limpo e centralizado, porta da cabine fechada e travada.
 
-3. Bloqueio de energia, nesta ordem:
+4. Bloqueio de energia, nesta ordem:
    1) Desligar a máquina no painel
-   2) Bloquear a chave geral com cadeado
-   3) Etiquetar com nome e data
-   4) Despressurizar a linha de gás
-   5) Testar ausência de energia
+   2) Despressurizar a linha de gás
+   3) Testar ausência de energia
+   4) Etiquetar com nome e data
+   5) Bloquear a chave geral com cadeado
 
 ESTAÇÃO 2 - MÁQUINA (linha FLG-203 da IT)
    - Chapa: SAE 1020 - 3,0 mm
    - Bico: 1,5 mm
    - Gás: Oxigênio (O2)
 
-ESTAÇÃO 3 - CÓDIGO, nesta ordem:
+ESTAÇÃO 3 - SOFTWARE
+
+1. Arquivo .DXF (marcar 5 irregulares):
+   - Unidade do desenho em polegadas
+   - Contorno externo com um trecho aberto
+   - Linhas duplicadas sobrepostas
+   - Peça desenhada em escala 1:10
+   - Cotas e textos dentro da camada de corte
+   NÃO marcar: furos em camada separada, origem no canto inferior esquerdo, nome do
+   arquivo igual ao código da peça, DXF versão R14, camada CORTE na cor azul, contornos
+   dos furos fechados, peça única sem cópias fora da área.
+
+2. RDWorks, nesta ordem:
+   1) Importar o arquivo FLANGE_3MM.dxf
+   2) Atribuir uma camada de cor para furos e outra para o contorno
+   3) Definir velocidade e potência de cada camada
+   4) Ordenar: furos internos antes do contorno externo
+   5) Baixar o arquivo (.rd) para a máquina
+
+3. LightBurn, nesta ordem:
+   1) Importar o arquivo FLANGE_3MM.dxf
+   2) Conferir o tamanho da peça em mm
+   3) Definir o modo Linha e os parâmetros da camada
+   4) Ativar "Cortar formas internas primeiro"
+   5) Enquadrar (Frame) e enviar o trabalho
+
+ESTAÇÃO 4 - CÓDIGO, nesta ordem:
    1) Carregar programa FLANGE_3MM
    2) Definir origem da peça
    3) Abrir válvula de gás
    4) Rodar simulação a seco
    5) Iniciar o corte
 
-ESTAÇÃO 4 - AJUSTE (modelo 2D do laser: arrastar, roda do mouse, setas ou botões - e +)
+ESTAÇÃO 5 - AJUSTE (modelo 2D do laser: arrastar, roda do mouse, setas ou botões - e +)
    Controle na máquina                       | Valor da IT | Faixa aceita
    Pressão do gás (botão do regulador do O2) | 0,7 bar     | 0,6 a 0,8 bar
    Foco (ponto focal do feixe ou régua)      | -1,5 mm     | -2,0 a -1,0 mm
    Altura do bico (o próprio cabeçote)       | 1,0 mm      | 0,8 a 1,2 mm
 
-ESTAÇÃO 5 - CORTAR: automática.
+ESTAÇÃO 6 - CORTAR: automática.
 
 
 ==================================================
@@ -68,11 +103,20 @@ ESTAÇÃO 1 - SEGURANÇA
    - Luva de raspa de punho curto
    - Botina com biqueira de aço
    - Protetor auricular tipo concha
-   - Camisa de manga longa abotoada no punho
+   - Jaleco
    NÃO marcar: óculos sem proteção lateral, óculos de solda, luva de tecido de punho
    longo, sapato de couro sem biqueira, capacete, relógio e pulseira, avental de PVC.
 
-2. Inspeção (marcar 5 irregulares):
+2. EPCs (marcar 5):
+   - Cortina de luz
+   - Comando bimanual
+   - Protetor fixo do volante
+   - Botão de parada de emergência
+   - Sinalização e faixa de risco no piso
+   NÃO marcar (são EPIs ou outros): óculos, luva de raspa, protetor auricular, botina,
+   jaleco, capacete, avental de PVC.
+
+3. Inspeção (marcar 5 irregulares):
    - Protetor do volante instalado com apenas 2 dos 4 parafusos
    - Botão direito do bimanual travado com um pedaço de madeira
    - Botão de emergência que não trava ao ser pressionado
@@ -82,12 +126,12 @@ ESTAÇÃO 1 - SEGURANÇA
    fechado, área limpa sem sucata, sinalização de zona de risco visível, pedal de
    acionamento protegido e fora de uso, registro do teste de tempo de parada dentro do prazo.
 
-3. Bloqueio de energia (troca de matriz), nesta ordem:
+4. Bloqueio de energia (troca de matriz), nesta ordem:
    1) Desligar o motor principal no painel
-   2) Bloquear a chave geral com cadeado
-   3) Etiquetar com nome e data
-   4) Aliviar a energia residual (volante parado)
-   5) Testar ausência de energia
+   2) Aliviar a energia residual (volante parado)
+   3) Testar ausência de energia
+   4) Etiquetar com nome e data
+   5) Bloquear a chave geral com cadeado
 
 ESTAÇÃO 2 - FERRAMENTA (linha SUP-120 da IT)
    - Chapa: SAE 1010 - 2,0 mm

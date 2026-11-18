@@ -5,40 +5,43 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Laser Training</title>
 <style>
-:root{--ink:#1e2a38;--steel:#2b4a6f;--sun:#ffc933;--red:#e4412f;--ok:#2e9e5b;--paper:#fff8e5;--sky:#9fd4ee}
+:root{--ink:#003049;--steel:#003049;--sun:#669BBC;--red:#C1121F;--ok:#669BBC;--paper:#FDF0D5;--sky:#780000}
 *{box-sizing:border-box}
 body{margin:0;font-family:"Arial Rounded MT Bold","Trebuchet MS",Verdana,sans-serif;background:var(--sky);color:var(--ink);min-height:100vh}
 button{font:inherit;cursor:pointer;color:inherit}
 button:focus-visible,input:focus-visible{outline:4px solid var(--ink);outline-offset:2px}
 .wrap{max-width:1180px;margin:0 auto;padding:12px}
 .card{background:var(--paper);border:4px solid var(--ink);border-radius:22px;padding:16px;box-shadow:0 6px 0 var(--ink);margin-bottom:14px}
-h1{font-size:2rem;margin:0 0 6px}h2{font-size:1.4rem;margin:0 0 6px}p{margin:6px 0;line-height:1.4}
-.btn{background:var(--sun);border:4px solid var(--ink);border-radius:16px;padding:12px 20px;font-size:1.1rem;box-shadow:0 5px 0 var(--ink);transition:transform .08s}
+h1,h2{font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-weight:normal;letter-spacing:.5px}h1{font-size:2.4rem;margin:0 0 6px}h2{font-size:1.7rem;margin:0 0 6px}p{margin:6px 0;line-height:1.4}
+.btn{background:var(--red);color:var(--paper);border:4px solid var(--ink);border-radius:16px;padding:12px 20px;font-size:1.1rem;box-shadow:0 5px 0 var(--ink);transition:transform .08s}
 .btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--ink)}
-.btn:disabled{background:#cfcfcf;color:#777;cursor:not-allowed}
-.btn.alt{background:#fff}
+.btn:disabled{background:var(--sun);color:var(--ink);opacity:.55;cursor:not-allowed}
+.btn.alt{background:#FDF0D5}
 input{font:inherit;padding:10px;border:3px solid var(--ink);border-radius:12px;width:100%;margin:4px 0 10px}
 .top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
-#mq [data-p]{outline:none}#mq [data-p]:hover,#mq [data-p]:focus,#mq [data-p].on{filter:drop-shadow(0 0 5px #ffc933)}
-.hmi{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;background:#10181f;border:4px solid var(--ink);border-radius:12px;padding:10px;margin:12px 0;color:#7CFC9A;font-family:"Courier New",monospace}.hmi b{display:block;font-size:.8rem;color:#9fd4ee}.hmi .v{font-size:1.15rem}.hmi button{background:#1e2a38;color:#7CFC9A;border:2px solid #7CFC9A;border-radius:8px;padding:2px 12px;font-family:inherit;font-size:1.1rem}
-.ped{background:#fff3c4}.ped .ph{font-weight:bold;letter-spacing:1px;border-bottom:3px dashed var(--steel);padding-bottom:6px;margin-bottom:8px}.who{display:flex;align-items:center;gap:10px}.who span{font-size:2.6rem}.bub{background:#fff;border:3px solid var(--ink);border-radius:16px;padding:8px 12px;font-size:1.05rem}
-.ticket{background:#fff;border:3px dashed var(--steel);border-radius:10px;padding:8px 12px;font-size:.95rem}
+#mq [data-p]{outline:none}#mq [data-p]:hover,#mq [data-p]:focus,#mq [data-p].on{filter:drop-shadow(0 0 5px #669BBC)}
+.hmi{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;background:#003049;border:4px solid var(--ink);border-radius:12px;padding:10px;margin:12px 0;color:#FDF0D5;font-family:"Courier New",monospace}.hmi b{display:block;font-size:.8rem;color:#669BBC}.hmi .v{font-size:1.15rem}.hmi button{background:#003049;color:#FDF0D5;border:2px solid #FDF0D5;border-radius:8px;padding:2px 12px;font-family:inherit;font-size:1.1rem}
+.ped{background:#669BBC}.ped .ph{font-weight:bold;letter-spacing:1px;border-bottom:3px dashed var(--steel);padding-bottom:6px;margin-bottom:8px}.who{display:flex;align-items:center;gap:10px}.who span{font-size:2.6rem}.bub{background:#FDF0D5;border:3px solid var(--ink);border-radius:16px;padding:8px 12px;font-size:1.05rem}
+.ticket{background:#FDF0D5;border:3px dashed var(--steel);border-radius:10px;padding:8px 12px;font-size:.95rem}
 .nav{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:14px}
-.st{background:var(--steel);color:#fff;border:4px solid var(--ink);border-radius:16px;padding:8px 2px;text-align:center;box-shadow:0 5px 0 var(--ink);font-size:.85rem}
+.st{background:var(--steel);color:#FDF0D5;border:4px solid var(--ink);border-radius:16px;padding:8px 2px;text-align:center;box-shadow:0 5px 0 var(--ink);font-size:.85rem}
 .st b{display:block;font-size:1.8rem}
-.st.on{background:var(--sun);color:var(--ink)}.st.ok{background:var(--ok)}.st.lock{background:#8a95a1;opacity:.7}
+.st.on{background:var(--red);color:var(--paper)}.st.ok{background:var(--ok);color:var(--ink)}.st.lock{background:var(--steel);opacity:.45}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
-.it{background:#fff;border:4px solid var(--ink);border-radius:16px;padding:10px;text-align:center;font-size:.95rem;min-height:110px}
+.it{background:#FDF0D5;border:4px solid var(--ink);border-radius:16px;padding:10px;text-align:center;font-size:.95rem;min-height:110px}
 .it i{display:block;font-style:normal;font-size:2.4rem}
 .lay{display:grid;grid-template-columns:1fr;gap:14px}.itp{align-self:start}.itp table{font-size:.78rem}.hl td{background:var(--sun);font-weight:bold}
-@media (min-width:900px){.lay{grid-template-columns:1fr 380px}.itp{position:sticky;top:12px}}
-.cell{display:flex;flex-direction:column;gap:6px}.cell .it{flex:1}.dtb{font-size:.85rem;background:#fff;border:3px solid var(--ink);border-radius:10px;padding:4px}.dtx{background:#fff;border:3px dashed var(--steel);border-radius:10px;padding:6px;font-size:.85rem}
-.it.sel{background:var(--sun)}.it.done{background:#bfe8cf;opacity:.8}
-.it .n{display:inline-block;background:var(--ink);color:#fff;border-radius:50%;width:26px;height:26px;line-height:26px;margin-top:4px}
+@media (min-width:900px){.lay{grid-template-columns:1fr 440px}.itp{position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto}}
+.itp table{table-layout:fixed;font-size:.74rem}.itp td,.itp th{padding:3px;word-break:break-word}
+.ck{list-style:none;padding:0;columns:2;margin:6px 0}.ck li{margin:4px 0;break-inside:avoid}
+@media print{body{background:#fff}.btn,.toast{display:none}}
+.cell{display:flex;flex-direction:column;gap:6px}.cell .it{flex:1}.dtb{font-size:.85rem;background:#FDF0D5;border:3px solid var(--ink);border-radius:10px;padding:4px}.dtx{background:#FDF0D5;border:3px dashed var(--steel);border-radius:10px;padding:6px;font-size:.85rem}
+.it.sel{background:var(--sun)}.it.done{background:#669BBC;opacity:.8}
+.it .n{display:inline-block;background:var(--ink);color:#FDF0D5;border-radius:50%;width:26px;height:26px;line-height:26px;margin-top:4px}
 .sl{margin:14px 0}.sl label{display:flex;justify-content:space-between;font-size:1.05rem}
 .sl input[type=range]{padding:0;border:0;height:34px}
 .toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);max-width:92vw;padding:12px 18px;border:4px solid var(--ink);border-radius:16px;font-size:1.05rem;box-shadow:0 5px 0 var(--ink);z-index:9}
-.toast.g{background:#bfe8cf}.toast.b{background:#ffb4a8}
+.toast.g{background:#669BBC;color:#003049}.toast.b{background:#C1121F;color:#FDF0D5}
 table{border-collapse:collapse;width:100%;font-size:.85rem}td,th{border:2px solid var(--ink);padding:4px 6px;text-align:left}
 .scroll{overflow-x:auto}
 .big{font-size:3rem;margin:0}
@@ -59,18 +62,29 @@ const IT1=[["FLG-201","SAE 1020","2,0","O₂","1,2","0,8","-1,0","1,0"],["FLG-20
 function mk1(){const W="Passo fora de ordem. Revise o procedimento.";return[
  [ // 0 Segurança
   {t:"multi",h:"1. Vista os EPIs",p:"Selecione todos os EPIs exigidos para operar este laser.",it:[
-   ["🥽","Óculos para laser 1064 nm (OD 5+)",1],["🥽","Óculos para laser 532 nm (OD 5+)",0],["🥽","Óculos para laser CO₂ 10600 nm",0],["🕶️","Óculos de solda (filtro escuro)",0],["🧤","Luva de raspa",1],["🧤","Luva nitrílica",0],["🥾","Botina com biqueira",1],["👟","Tênis antiderrapante",0],["🎧","Protetor auricular tipo plug",1],["👷","Capacete",0],["🧥","Avental de PVC",0],["👕","Camisa de manga longa de algodão",1]],
+   ["🥽","Óculos para laser 1064 nm (OD 5+)",1],["🥽","Óculos para laser 532 nm (OD 5+)",0],["🥽","Óculos para laser CO₂ 10600 nm",0],["🕶️","Óculos de solda (filtro escuro)",0],["🧤","Luva de raspa",1],["🧤","Luva nitrílica",0],["🥾","Botina com biqueira",1],["👟","Tênis antiderrapante",0],["🎧","Protetor auricular tipo plug",1],["👷","Capacete",0],["🧥","Avental de PVC",0],["🥼","Jaleco",1]],
    w:"Há EPIs errados ou faltando. Revise."},
-  {t:"multi",h:"2. Inspecione a área",p:"Você chegou ao posto. Marque tudo o que impede iniciar a operação.",it:[
-   ["🧯","Extintor de água ao lado do painel elétrico",1],["🛑","Botão de emergência livre e testado",0],["🔬","Lente de proteção do cabeçote com marcas de queimado",1],["🚪","Intertravamento da porta testado no turno",0],["🟦","Cilindro de O₂ sem corrente de fixação",1],["🧱","Mesa de corte limpa, sem escória",0],["💡","Luz de aviso de laser ligado queimada",1],["🟨","Faixa de risco no piso visível",0],["💨","Filtro da exaustão saturado com alarme ativo",1],["🪟","Visor da cabine com filtro para 1064 nm",0],["🔹","Bico do cabeçote limpo e centralizado",0],["🚪","Porta da cabine fechada e travada",0]],
+  {t:"multi",h:"2. Identifique os EPCs",p:"Selecione o que é proteção coletiva (EPC) deste posto. EPI não vale.",it:[
+   ["🪟","Cabine enclausurada com visor para 1064 nm",1],["🥽","Óculos para laser 1064 nm",0],["🚪","Intertravamento da porta da cabine",1],["🧤","Luva de raspa",0],["🛑","Botão de parada de emergência",1],["🎧","Protetor auricular tipo plug",0],["💨","Sistema de exaustão de fumos",1],["🥾","Botina com biqueira",0],["🟨","Sinalização e faixa de risco no piso",1],["🥼","Jaleco",0],["😷","Máscara PFF2",0],["👷","Capacete",0]],
+   w:"Há itens errados ou faltando. EPC protege todos; EPI protege só quem usa."},
+  {t:"multi",h:"3. Inspecione a área",p:"Você chegou ao posto. Marque tudo o que impede iniciar a operação.",it:[
+   ["🧯","Extintor de água ao lado da máquina",1],["🛑","Botão de emergência livre e testado",0],["🔬","Lente de proteção do cabeçote com marcas de queimado",1],["🚪","Intertravamento da porta testado no turno",0],["🟦","Cilindro de O₂ sem corrente de fixação",1],["🧱","Mesa de corte limpa, sem escória",0],["💡","Luz de aviso de laser ligado queimada",1],["🟨","Faixa de risco no piso visível",0],["💨","Filtro da exaustão saturado com alarme ativo",1],["🪟","Visor da cabine com filtro para 1064 nm",0],["🔹","Bico do cabeçote limpo e centralizado",0],["🚪","Porta da cabine fechada e travada",0]],
    w:"A inspeção está incorreta. Revise."},
-  {t:"seq",h:"3. Bloqueio de energia (troca de bico)",p:"Toque nos passos na ordem correta.",it:[
-   ["⏻","Desligar a máquina no painel",0],["🔒","Bloquear a chave geral com cadeado",1],["🏷️","Etiquetar com nome e data",2],["💨","Despressurizar a linha de gás",3],["🧪","Testar ausência de energia",4]],w:W}],
+  {t:"seq",h:"4. Bloqueio de energia (troca de bico)",p:"Toque nos passos na ordem correta.",it:[
+   ["⏻","Desligar a máquina no painel",0],["💨","Despressurizar a linha de gás",1],["🧪","Testar ausência de energia",2],["🏷️","Etiquetar com nome e data",3],["🔒","Bloquear a chave geral com cadeado",4]],w:W}],
  [ // 1 Máquina
   {t:"one",h:"Separe a chapa",p:"Pegue no estoque a chapa da peça do pedido ao lado.",it:[["🟫","SAE 1020 – 3,0 mm",1],["🟫","SAE 1020 – 3,75 mm",0],["🟫","SAE 1020 – 2,0 mm",0],["⬜","Inox 304 – 3,0 mm",0]],w:"Chapa não atende ao pedido."},
   {t:"one",h:"Monte o bico",p:"Escolha o bico do cabeçote para essa chapa.",it:[["🔹","Bico 1,2 mm",0],["🔹","Bico 1,5 mm",1],["🔷","Bico 1,8 mm",0],["🔷","Bico 2,0 mm",0]],w:"Bico não confere com a IT."},
   {t:"one",h:"Abra o gás",p:"Escolha o gás de assistência para essa chapa.",it:[["🟦","Oxigênio (O₂)",1],["🟩","Nitrogênio (N₂)",0],["💨","Ar comprimido",0],["⬜","Argônio",0]],w:"Gás não confere com a IT."}],
- [ // 2 Código
+ [ // 2 Software
+  {t:"multi",h:"1. Arquivo .DXF",p:"Abra o FLANGE_3MM.dxf no CAD. Marque o que está irregular no arquivo.",it:[
+   ["📏","Unidade do desenho em polegadas",1],["🗂️","Furos em camada separada do contorno externo",0],["⭕","Contorno externo com um trecho aberto",1],["📍","Origem da peça no canto inferior esquerdo",0],["📑","Linhas duplicadas sobrepostas",1],["🏷️","Nome do arquivo igual ao código da peça",0],["🔍","Peça desenhada em escala 1:10",1],["💾","Arquivo salvo em DXF versão R14",0],["✏️","Cotas e textos dentro da camada de corte",1],["🔵","Camada CORTE na cor azul",0],["🔘","Contornos dos furos fechados",0],["📐","Peça única, sem cópias fora da área",0]],
+   w:"O arquivo ainda tem problemas. Revise."},
+  {t:"seq",h:"2. RDWorks",p:"Monte o trabalho no RDWorks, na ordem correta.",it:[
+   ["📂","Importar o arquivo FLANGE_3MM.dxf",0],["🎨","Atribuir uma camada de cor para furos e outra para o contorno",1],["⚡","Definir velocidade e potência de cada camada",2],["🔢","Ordenar: furos internos antes do contorno externo",3],["📤","Baixar o arquivo (.rd) para a máquina",4]],w:W},
+  {t:"seq",h:"3. LightBurn",p:"Monte o trabalho no LightBurn, na ordem correta.",it:[
+   ["📂","Importar o arquivo FLANGE_3MM.dxf",0],["📏","Conferir o tamanho da peça em mm",1],["〰️","Definir o modo Linha e os parâmetros da camada",2],["🔁","Ativar \"Cortar formas internas primeiro\"",3],["🖼️","Enquadrar (Frame) e enviar o trabalho",4]],w:W}],
+ [ // 3 Código
   {t:"seq",h:"Monte o programa de corte",p:"Toque nos passos na ordem da IT.",it:[
    ["📂","Carregar programa FLANGE_3MM",0],["📍","Definir origem da peça",1],["🟦","Abrir válvula de gás",2],["👀","Rodar simulação a seco",3],["▶️","Iniciar o corte",4]],w:W}],
  [ // 3 Ajuste (aço carbono 3,0: 0,7 bar ±0,1 / foco -1,5 ±0,5 / altura 1,0 ±0,2)
@@ -80,49 +94,49 @@ function mk1(){const W="Passo fora de ordem. Revise o procedimento.";return[
    {k:"Altura do bico",u:"mm",min:0.5,max:3,st:0.1,v:2.5,lo:0.8,hi:1.2,ty:"v",y0:188,y1:153}]}]
 ]}
 
-function itHTML(){const L=LV[S.lv],t=L.it,d=L.ped;return `<aside class="itp"><div class="card ped"><div class="ph">🧾 PEDIDO Nº ${d.n}</div><div class="who"><span>🧑‍🏭</span><div class="bub">Quero <b>${d.q}</b>, por favor!</div></div><small>Cliente: ${d.cli}</small></div><div class="card"><h2>📖 ${t.t}</h2><p><small>${t.info}</small></p><div class="scroll"><table><tr>${t.head.map(c=>"<th>"+c+"</th>").join("")}</tr>${t.rows.map(r=>"<tr"+(r[0]==t.hl?' class="hl"':"")+">"+r.map(c=>"<td>"+c+"</td>").join("")+"</tr>").join("")}</table></div><p><small>${t.note}</small></p></div></aside>`}
+function itHTML(){const L=LV[S.lv],t=L.it,d=L.ped;return `<aside class="itp"><div class="card ped"><div class="ph">🧾 PEDIDO Nº ${d.n}</div><div class="who"><span>🧑‍🏭</span><div class="bub">Quero <b>${d.q}</b>, por favor!</div></div><small>Cliente: ${d.cli}</small></div><div class="card"><h2>📖 ${t.t}</h2><p><small>${t.info}</small></p><div><table><tr>${t.head.map(c=>"<th>"+c+"</th>").join("")}</tr>${t.rows.map(r=>"<tr"+(r[0]==t.hl?' class="hl"':"")+">"+r.map(c=>"<td>"+c+"</td>").join("")+"</tr>").join("")}</table></div><p><small>${t.note}</small></p></div></aside>`}
 
 /* ===== MODELOS 2D DAS MÁQUINAS (tela de Ajuste) ===== */
 const posY=r=>r.y0+(r.cur-r.min)/(r.max-r.min)*(r.y1-r.y0);
 const fv=r=>String(r.st<1?r.cur.toFixed(1):r.cur).replace(".",",")+" "+r.u;
 const G=(i,r,c,x)=>`<g data-p="${i}" tabindex="0" role="slider" aria-label="${r.k}" aria-valuemin="${r.min}" aria-valuemax="${r.max}" aria-valuenow="${r.cur}" style="cursor:${c}">${x}</g>`;
-const bub=(x,y,t)=>{const w=t.length*6.4+16;x=Math.max(w/2+4,Math.min(516-w/2,x));return `<g pointer-events="none"><rect x="${x-w/2}" y="${y-20}" width="${w}" height="22" rx="8" fill="#fff" stroke="#1e2a38" stroke-width="2"/><text x="${x}" y="${y-5}" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e2a38">${t}</text></g>`};
+const bub=(x,y,t)=>{const w=t.length*6.4+16;x=Math.max(w/2+4,Math.min(516-w/2,x));return `<g pointer-events="none"><rect x="${x-w/2}" y="${y-20}" width="${w}" height="22" rx="8" fill="#FDF0D5" stroke="#003049" stroke-width="2"/><text x="${x}" y="${y-5}" text-anchor="middle" font-size="12" font-weight="bold" fill="#003049">${t}</text></g>`};
 function dialSVG(r,i){const a=(-135+(r.cur-r.min)/(r.max-r.min)*270)*Math.PI/180,R=40,P=(q,d)=>[r.cx+Math.sin(q)*d,r.cy-Math.cos(q)*d];let t="";
- for(let k=0;k<=10;k++){const q=(-135+k*27)*Math.PI/180,u=P(q,R-2),w=P(q,R-(k%5?8:12));t+=`<line x1="${u[0]}" y1="${u[1]}" x2="${w[0]}" y2="${w[1]}" stroke="#1e2a38" stroke-width="2"/>`;
-  if(k%5==0){const l=P(q,R-21);t+=`<text x="${l[0]}" y="${l[1]+3}" text-anchor="middle" font-size="8" fill="#1e2a38">${+(r.min+(r.max-r.min)*k/10).toFixed(1)}</text>`}}
+ for(let k=0;k<=10;k++){const q=(-135+k*27)*Math.PI/180,u=P(q,R-2),w=P(q,R-(k%5?8:12));t+=`<line x1="${u[0]}" y1="${u[1]}" x2="${w[0]}" y2="${w[1]}" stroke="#003049" stroke-width="2"/>`;
+  if(k%5==0){const l=P(q,R-21);t+=`<text x="${l[0]}" y="${l[1]+3}" text-anchor="middle" font-size="8" fill="#003049">${+(r.min+(r.max-r.min)*k/10).toFixed(1)}</text>`}}
  const n=P(a,R-14);
- return G(i,r,"pointer",`<circle cx="${r.cx}" cy="${r.cy}" r="${R+5}" fill="#8a95a1" stroke="#1e2a38" stroke-width="3"/><circle cx="${r.cx}" cy="${r.cy}" r="${R}" fill="#fff" stroke="#1e2a38" stroke-width="2"/>${t}<line x1="${r.cx}" y1="${r.cy}" x2="${n[0]}" y2="${n[1]}" stroke="#e4412f" stroke-width="3" stroke-linecap="round"/><circle cx="${r.cx}" cy="${r.cy}" r="8" fill="#1e2a38"/>`)+`<text x="${r.cx}" y="${r.cy+R+17}" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e2a38">${r.k}</text><text x="${r.cx}" y="${r.cy+R+30}" text-anchor="middle" font-size="12" fill="#1e2a38">${fv(r)}</text>`}
+ return G(i,r,"pointer",`<circle cx="${r.cx}" cy="${r.cy}" r="${R+5}" fill="#669BBC" stroke="#003049" stroke-width="3"/><circle cx="${r.cx}" cy="${r.cy}" r="${R}" fill="#FDF0D5" stroke="#003049" stroke-width="2"/>${t}<line x1="${r.cx}" y1="${r.cy}" x2="${n[0]}" y2="${n[1]}" stroke="#C1121F" stroke-width="3" stroke-linecap="round"/><circle cx="${r.cx}" cy="${r.cy}" r="8" fill="#003049"/>`)+`<text x="${r.cx}" y="${r.cy+R+17}" text-anchor="middle" font-size="11" font-weight="bold" fill="#003049">${r.k}</text><text x="${r.cx}" y="${r.cy+R+30}" text-anchor="middle" font-size="12" fill="#003049">${fv(r)}</text>`}
 function drawLaser(R,act){const hy0=posY(R[2]),tip=hy0+55,hy=hy0-35,fy=posY(R[1]),p=R[0].cur,d=+(0.7-p/30).toFixed(2),ph=-((Date.now()/1000)%d).toFixed(2);let rl="",sl="";
- for(let k=0;k<=6;k++)rl+=`<line x1="414" y1="${290-k*10}" x2="${k%2?424:428}" y2="${290-k*10}" stroke="#1e2a38" stroke-width="2"/>`;
- for(let k=0;k<16;k++)sl+=`<polygon points="${112+k*25},270 ${137+k*25},270 ${124.5+k*25},282" fill="#6b7785"/>`;
- const T=(x,y,t,c="#1e2a38",f=11)=>`<text x="${x}" y="${y}" text-anchor="middle" font-size="${f}" font-weight="bold" fill="${c}">${t}</text>`;
- return `<rect x="0" y="282" width="520" height="18" fill="#8a95a1"/>${sl}<rect x="110" y="250" width="400" height="20" fill="#b9c2cc" stroke="#1e2a38" stroke-width="3"/>${T(470,264,"Chapa")}
- <rect x="110" y="18" width="310" height="26" rx="4" fill="#4a5a6a" stroke="#1e2a38" stroke-width="3"/><rect x="215" y="44" width="70" height="22" fill="#6b7785" stroke="#1e2a38" stroke-width="3"/><rect x="243" y="66" width="14" height="${hy-66}" fill="#8a95a1" stroke="#1e2a38" stroke-width="2"/>
- <path d="M115 31 C175 31 175 ${hy-10} 225 ${hy+10}" fill="none" stroke="#e0a31a" stroke-width="6"/>
- <rect x="42" y="190" width="66" height="92" rx="14" fill="#4a90d9" stroke="#1e2a38" stroke-width="3"/><rect x="52" y="200" width="8" height="70" rx="4" fill="#fff" fill-opacity=".35"/>${T(80,248,"O₂","#fff",16)}<rect x="62" y="162" width="26" height="28" rx="4" fill="#8a95a1" stroke="#1e2a38" stroke-width="3"/><rect x="70" y="150" width="10" height="14" fill="#1e2a38"/>
- <path d="M88 176 H165 V${hy+30} H225" fill="none" stroke="#1e2a38" stroke-width="5"/>
- <g pointer-events="none"><line x1="250" y1="${tip+2}" x2="250" y2="248" stroke="#4a90d9" stroke-width="${1+p/4}" stroke-dasharray="3 4" stroke-opacity="${(.25+p/20).toFixed(2)}"><animate attributeName="stroke-dashoffset" from="0" to="-7" dur="${d}s" begin="${ph}s" repeatCount="indefinite"/></line><line x1="${244-p*3}" y1="247" x2="${256+p*3}" y2="247" stroke="#4a90d9" stroke-width="2" stroke-dasharray="3 4" stroke-opacity="${(.25+p/20).toFixed(2)}"/></g>
- ${G(2,R[2],"ns-resize",`<rect x="222" y="${hy}" width="56" height="45" rx="6" fill="#2b4a6f" stroke="#1e2a38" stroke-width="3"/><rect x="228" y="${hy+45}" width="44" height="25" fill="#6b7785" stroke="#1e2a38" stroke-width="3"/><rect x="232" y="${hy+8}" width="36" height="24" rx="4" fill="#dfeaf2" stroke="#1e2a38" stroke-width="2"/><ellipse cx="250" cy="${hy+22}" rx="14" ry="5" fill="#9fd4ee" stroke="#1e2a38" stroke-width="2"/><polygon points="228,${hy+70} 272,${hy+70} 257,${tip} 243,${tip}" fill="#8a95a1" stroke="#1e2a38" stroke-width="3"/><text x="302" y="${hy+30}" text-anchor="middle" font-size="14" fill="#1e2a38">▲▼</text>`)}
- <line x1="324" y1="${tip}" x2="324" y2="250" stroke="#e4412f" stroke-width="3"/><line x1="318" y1="${tip}" x2="330" y2="${tip}" stroke="#e4412f" stroke-width="2"/><line x1="318" y1="250" x2="330" y2="250" stroke="#e4412f" stroke-width="2"/>${T(342,(tip+250)/2+4,"altura","#1e2a38",10)}
- <line x1="420" y1="230" x2="420" y2="290" stroke="#1e2a38" stroke-width="3"/>${rl}${T(444,254,"0","#1e2a38",9)}${T(444,234,"+2","#1e2a38",9)}${T(444,292,"-4","#1e2a38",9)}${T(455,222,"Foco")}
- ${G(1,R[1],"ns-resize",`<polygon points="228,${hy+34} 272,${hy+34} 250,${fy}" fill="#e4412f" fill-opacity=".45" stroke="#e4412f" stroke-width="2" pointer-events="none"/><line x1="254" y1="${fy}" x2="406" y2="${fy}" stroke="#e4412f" stroke-width="2" stroke-dasharray="5 4" pointer-events="none"/><circle cx="250" cy="${fy}" r="8" fill="#ffc933" stroke="#1e2a38" stroke-width="3"/><polygon points="418,${fy} 436,${fy-10} 436,${fy+10}" fill="#ffc933" stroke="#1e2a38" stroke-width="3"/>`)}
- <rect x="425" y="24" width="88" height="66" rx="6" fill="#10181f" stroke="#1e2a38" stroke-width="3"/><text x="431" y="38" font-size="9" fill="#9fd4ee" font-family="monospace">CNC LASER</text><text x="431" y="54" font-size="10" fill="#7CFC9A" font-family="monospace">G ${fv(R[0])}</text><text x="431" y="68" font-size="10" fill="#7CFC9A" font-family="monospace">F ${fv(R[1])}</text><text x="431" y="82" font-size="10" fill="#7CFC9A" font-family="monospace">H ${fv(R[2])}</text>
+ for(let k=0;k<=6;k++)rl+=`<line x1="414" y1="${290-k*10}" x2="${k%2?424:428}" y2="${290-k*10}" stroke="#003049" stroke-width="2"/>`;
+ for(let k=0;k<16;k++)sl+=`<polygon points="${112+k*25},270 ${137+k*25},270 ${124.5+k*25},282" fill="#669BBC"/>`;
+ const T=(x,y,t,c="#003049",f=11)=>`<text x="${x}" y="${y}" text-anchor="middle" font-size="${f}" font-weight="bold" fill="${c}">${t}</text>`;
+ return `<rect x="0" y="282" width="520" height="18" fill="#669BBC"/>${sl}<rect x="110" y="250" width="400" height="20" fill="#FDF0D5" stroke="#003049" stroke-width="3"/>${T(470,264,"Chapa")}
+ <rect x="110" y="18" width="310" height="26" rx="4" fill="#003049" stroke="#003049" stroke-width="3"/><rect x="215" y="44" width="70" height="22" fill="#669BBC" stroke="#003049" stroke-width="3"/><rect x="243" y="66" width="14" height="${hy-66}" fill="#669BBC" stroke="#003049" stroke-width="2"/>
+ <path d="M115 31 C175 31 175 ${hy-10} 225 ${hy+10}" fill="none" stroke="#C1121F" stroke-width="6"/>
+ <rect x="42" y="190" width="66" height="92" rx="14" fill="#669BBC" stroke="#003049" stroke-width="3"/><rect x="52" y="200" width="8" height="70" rx="4" fill="#FDF0D5" fill-opacity=".35"/>${T(80,248,"O₂","#FDF0D5",16)}<rect x="62" y="162" width="26" height="28" rx="4" fill="#669BBC" stroke="#003049" stroke-width="3"/><rect x="70" y="150" width="10" height="14" fill="#003049"/>
+ <path d="M88 176 H165 V${hy+30} H225" fill="none" stroke="#003049" stroke-width="5"/>
+ <g pointer-events="none"><line x1="250" y1="${tip+2}" x2="250" y2="248" stroke="#669BBC" stroke-width="${1+p/4}" stroke-dasharray="3 4" stroke-opacity="${(.25+p/20).toFixed(2)}"><animate attributeName="stroke-dashoffset" from="0" to="-7" dur="${d}s" begin="${ph}s" repeatCount="indefinite"/></line><line x1="${244-p*3}" y1="247" x2="${256+p*3}" y2="247" stroke="#669BBC" stroke-width="2" stroke-dasharray="3 4" stroke-opacity="${(.25+p/20).toFixed(2)}"/></g>
+ ${G(2,R[2],"ns-resize",`<rect x="222" y="${hy}" width="56" height="45" rx="6" fill="#003049" stroke="#003049" stroke-width="3"/><rect x="228" y="${hy+45}" width="44" height="25" fill="#669BBC" stroke="#003049" stroke-width="3"/><rect x="232" y="${hy+8}" width="36" height="24" rx="4" fill="#FDF0D5" stroke="#003049" stroke-width="2"/><ellipse cx="250" cy="${hy+22}" rx="14" ry="5" fill="#669BBC" stroke="#003049" stroke-width="2"/><polygon points="228,${hy+70} 272,${hy+70} 257,${tip} 243,${tip}" fill="#669BBC" stroke="#003049" stroke-width="3"/><text x="302" y="${hy+30}" text-anchor="middle" font-size="14" fill="#003049">▲▼</text>`)}
+ <line x1="324" y1="${tip}" x2="324" y2="250" stroke="#C1121F" stroke-width="3"/><line x1="318" y1="${tip}" x2="330" y2="${tip}" stroke="#C1121F" stroke-width="2"/><line x1="318" y1="250" x2="330" y2="250" stroke="#C1121F" stroke-width="2"/>${T(342,(tip+250)/2+4,"altura","#003049",10)}
+ <line x1="420" y1="230" x2="420" y2="290" stroke="#003049" stroke-width="3"/>${rl}${T(444,254,"0","#003049",9)}${T(444,234,"+2","#003049",9)}${T(444,292,"-4","#003049",9)}${T(455,222,"Foco")}
+ ${G(1,R[1],"ns-resize",`<polygon points="228,${hy+34} 272,${hy+34} 250,${fy}" fill="#C1121F" fill-opacity=".45" stroke="#C1121F" stroke-width="2" pointer-events="none"/><line x1="254" y1="${fy}" x2="406" y2="${fy}" stroke="#C1121F" stroke-width="2" stroke-dasharray="5 4" pointer-events="none"/><circle cx="250" cy="${fy}" r="8" fill="#669BBC" stroke="#003049" stroke-width="3"/><polygon points="418,${fy} 436,${fy-10} 436,${fy+10}" fill="#669BBC" stroke="#003049" stroke-width="3"/>`)}
+ <rect x="425" y="24" width="88" height="66" rx="6" fill="#003049" stroke="#003049" stroke-width="3"/><text x="431" y="38" font-size="9" fill="#669BBC" font-family="monospace">CNC LASER</text><text x="431" y="54" font-size="10" fill="#FDF0D5" font-family="monospace">G ${fv(R[0])}</text><text x="431" y="68" font-size="10" fill="#FDF0D5" font-family="monospace">F ${fv(R[1])}</text><text x="431" y="82" font-size="10" fill="#FDF0D5" font-family="monospace">H ${fv(R[2])}</text>
  ${dialSVG(R[0],0)}${act===0?bub(75,34,R[0].k+": "+fv(R[0])):""}${act===2?bub(302,hy-8,R[2].k+": "+fv(R[2])):""}${act===1?bub(440,fy-18,R[1].k+": "+fv(R[1])):""}`}
 function drawPress(R,act){const yc=posY(R[1]),yb=yc+20,d=+(60/R[2].cur).toFixed(2),ph=-((Date.now()/1000)%d).toFixed(2);let sk="",cl="",lc="";
- for(let k=0;k<6;k++){const q=k*Math.PI/3;sk+=`<line x1="75" y1="42" x2="${75+Math.sin(q)*26}" y2="${42-Math.cos(q)*26}" stroke="#1e2a38" stroke-width="4"/>`}
- for(let k=0;k<7;k++){cl+=`<circle cx="161" cy="${118+k*19}" r="2.5" fill="#e4412f"/><circle cx="359" cy="${118+k*19}" r="2.5" fill="#e4412f"/>`}
- [[105,"220"],[135,"205"],[165,"190"]].forEach(a=>{lc+=`<line x1="108" y1="${a[0]}" x2="116" y2="${a[0]}" stroke="#1e2a38" stroke-width="2"/><text x="92" y="${a[0]+4}" text-anchor="end" font-size="9" fill="#1e2a38">${a[1]}</text>`});
- const T=(x,y,t,c="#1e2a38",f=11)=>`<text x="${x}" y="${y}" text-anchor="middle" font-size="${f}" font-weight="bold" fill="${c}">${t}</text>`;
- return `<rect x="0" y="285" width="520" height="15" fill="#8a95a1"/>
- <rect x="120" y="40" width="24" height="245" fill="#4a5a6a" stroke="#1e2a38" stroke-width="3"/><rect x="376" y="40" width="24" height="245" fill="#4a5a6a" stroke="#1e2a38" stroke-width="3"/>
- <rect x="110" y="20" width="300" height="40" rx="6" fill="#2b4a6f" stroke="#1e2a38" stroke-width="3"/><rect x="100" y="36" width="14" height="12" fill="#1e2a38"/>
- <circle cx="75" cy="42" r="30" fill="#8a95a1" stroke="#1e2a38" stroke-width="4"/><g>${sk}<circle cx="75" cy="20" r="4" fill="#e4412f"/><animateTransform attributeName="transform" type="rotate" from="0 75 42" to="360 75 42" dur="${d}s" begin="${ph}s" repeatCount="indefinite"/></g><circle cx="75" cy="42" r="8" fill="#1e2a38"/>${T(75,84,"Volante","#1e2a38",10)}
- <rect x="130" y="250" width="260" height="35" fill="#2b4a6f" stroke="#1e2a38" stroke-width="3"/><rect x="180" y="225" width="160" height="25" fill="#8a95a1" stroke="#1e2a38" stroke-width="3"/><rect x="165" y="219" width="190" height="6" fill="#b9c2cc" stroke="#1e2a38" stroke-width="2"/>${T(260,242,"Matriz","#1e2a38",10)}
- <rect x="158" y="110" width="6" height="140" fill="#4a5a6a"/><rect x="356" y="110" width="6" height="140" fill="#4a5a6a"/>${cl}
- <rect x="250" y="60" width="20" height="${yb-100}" fill="#1e2a38"/>
- <line x1="108" y1="105" x2="108" y2="165" stroke="#1e2a38" stroke-width="3"/>${lc}<polygon points="98,${yc-7} 98,${yc+7} 110,${yc}" fill="#e4412f" stroke="#1e2a38" stroke-width="2"/>
- ${G(1,R[1],"ns-resize",`<rect x="150" y="${yb-40}" width="220" height="40" rx="6" fill="#e4412f" stroke="#1e2a38" stroke-width="3"/><rect x="144" y="${yb-40}" width="6" height="40" fill="#1e2a38"/><rect x="370" y="${yb-40}" width="6" height="40" fill="#1e2a38"/><rect x="190" y="${yb}" width="140" height="10" fill="#4a5a6a" stroke="#1e2a38" stroke-width="2"/><rect x="225" y="${yb+10}" width="70" height="14" fill="#8a95a1" stroke="#1e2a38" stroke-width="3"/><text x="260" y="${yb-14}" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">Martelo ▲▼</text>`)}
- <rect x="414" y="54" width="104" height="244" rx="8" fill="#dfe6ec" stroke="#1e2a38" stroke-width="3"/>${dialSVG(R[2],2)}${dialSVG(R[0],0)}
+ for(let k=0;k<6;k++){const q=k*Math.PI/3;sk+=`<line x1="75" y1="42" x2="${75+Math.sin(q)*26}" y2="${42-Math.cos(q)*26}" stroke="#003049" stroke-width="4"/>`}
+ for(let k=0;k<7;k++){cl+=`<circle cx="161" cy="${118+k*19}" r="2.5" fill="#C1121F"/><circle cx="359" cy="${118+k*19}" r="2.5" fill="#C1121F"/>`}
+ [[105,"220"],[135,"205"],[165,"190"]].forEach(a=>{lc+=`<line x1="108" y1="${a[0]}" x2="116" y2="${a[0]}" stroke="#003049" stroke-width="2"/><text x="92" y="${a[0]+4}" text-anchor="end" font-size="9" fill="#003049">${a[1]}</text>`});
+ const T=(x,y,t,c="#003049",f=11)=>`<text x="${x}" y="${y}" text-anchor="middle" font-size="${f}" font-weight="bold" fill="${c}">${t}</text>`;
+ return `<rect x="0" y="285" width="520" height="15" fill="#669BBC"/>
+ <rect x="120" y="40" width="24" height="245" fill="#003049" stroke="#003049" stroke-width="3"/><rect x="376" y="40" width="24" height="245" fill="#003049" stroke="#003049" stroke-width="3"/>
+ <rect x="110" y="20" width="300" height="40" rx="6" fill="#003049" stroke="#003049" stroke-width="3"/><rect x="100" y="36" width="14" height="12" fill="#003049"/>
+ <circle cx="75" cy="42" r="30" fill="#669BBC" stroke="#003049" stroke-width="4"/><g>${sk}<circle cx="75" cy="20" r="4" fill="#C1121F"/><animateTransform attributeName="transform" type="rotate" from="0 75 42" to="360 75 42" dur="${d}s" begin="${ph}s" repeatCount="indefinite"/></g><circle cx="75" cy="42" r="8" fill="#003049"/>${T(75,84,"Volante","#003049",10)}
+ <rect x="130" y="250" width="260" height="35" fill="#003049" stroke="#003049" stroke-width="3"/><rect x="180" y="225" width="160" height="25" fill="#669BBC" stroke="#003049" stroke-width="3"/><rect x="165" y="219" width="190" height="6" fill="#FDF0D5" stroke="#003049" stroke-width="2"/>${T(260,242,"Matriz","#003049",10)}
+ <rect x="158" y="110" width="6" height="140" fill="#003049"/><rect x="356" y="110" width="6" height="140" fill="#003049"/>${cl}
+ <rect x="250" y="60" width="20" height="${yb-100}" fill="#003049"/>
+ <line x1="108" y1="105" x2="108" y2="165" stroke="#003049" stroke-width="3"/>${lc}<polygon points="98,${yc-7} 98,${yc+7} 110,${yc}" fill="#C1121F" stroke="#003049" stroke-width="2"/>
+ ${G(1,R[1],"ns-resize",`<rect x="150" y="${yb-40}" width="220" height="40" rx="6" fill="#C1121F" stroke="#003049" stroke-width="3"/><rect x="144" y="${yb-40}" width="6" height="40" fill="#003049"/><rect x="370" y="${yb-40}" width="6" height="40" fill="#003049"/><rect x="190" y="${yb}" width="140" height="10" fill="#003049" stroke="#003049" stroke-width="2"/><rect x="225" y="${yb+10}" width="70" height="14" fill="#669BBC" stroke="#003049" stroke-width="3"/><text x="260" y="${yb-14}" text-anchor="middle" font-size="12" font-weight="bold" fill="#FDF0D5">Martelo ▲▼</text>`)}
+ <rect x="414" y="54" width="104" height="244" rx="8" fill="#FDF0D5" stroke="#003049" stroke-width="3"/>${dialSVG(R[2],2)}${dialSVG(R[0],0)}
  ${act===0?bub(466,44,R[0].k+": "+fv(R[0])):""}${act===2?bub(466,44,R[2].k+": "+fv(R[2])):""}${act===1?bub(60,yc-12,R[1].k+": "+fv(R[1])):""}`}
 
 /* ===== PRENSA (EXEMPLO: trocar pelos dados reais da IT da prensa) ===== */
@@ -130,13 +144,16 @@ const IT2=[["SUP-110","SAE 1010","1,5","MT-11","Óleo leve","25","210","40"],["S
 function mk2(){const W="Passo fora de ordem. Revise o procedimento.";return[
  [ // 0 Segurança
   {t:"multi",h:"1. Vista os EPIs",p:"Selecione todos os EPIs exigidos para operar esta prensa.",it:[
-   ["🥽","Óculos de segurança com proteção lateral",1],["🥽","Óculos de segurança sem proteção lateral",0],["🕶️","Óculos de solda (filtro escuro)",0],["🧤","Luva de raspa de punho curto",1],["🧤","Luva de tecido de punho longo",0],["🥾","Botina com biqueira de aço",1],["👞","Sapato de couro sem biqueira",0],["🎧","Protetor auricular tipo concha",1],["👷","Capacete",0],["⌚","Relógio e pulseira",0],["🧥","Avental de PVC",0],["👕","Camisa de manga longa abotoada no punho",1]],
+   ["🥽","Óculos de segurança com proteção lateral",1],["🥽","Óculos de segurança sem proteção lateral",0],["🕶️","Óculos de solda (filtro escuro)",0],["🧤","Luva de raspa de punho curto",1],["🧤","Luva de tecido de punho longo",0],["🥾","Botina com biqueira de aço",1],["👞","Sapato de couro sem biqueira",0],["🎧","Protetor auricular tipo concha",1],["👷","Capacete",0],["⌚","Relógio e pulseira",0],["🧥","Avental de PVC",0],["🥼","Jaleco",1]],
    w:"Há EPIs errados ou faltando. Revise."},
-  {t:"multi",h:"2. Inspecione a área",p:"Você chegou ao posto. Marque tudo o que impede iniciar a operação.",it:[
+  {t:"multi",h:"2. Identifique os EPCs",p:"Selecione o que é proteção coletiva (EPC) deste posto. EPI não vale.",it:[
+   ["🛡️","Cortina de luz",1],["🥽","Óculos de segurança com proteção lateral",0],["🖐️","Comando bimanual",1],["🧤","Luva de raspa de punho curto",0],["⚙️","Protetor fixo do volante",1],["🎧","Protetor auricular tipo concha",0],["🛑","Botão de parada de emergência",1],["🥾","Botina com biqueira de aço",0],["⚠️","Sinalização e faixa de risco no piso",1],["🥼","Jaleco",0],["👷","Capacete",0],["🧥","Avental de PVC",0]],
+   w:"Há itens errados ou faltando. EPC protege todos; EPI protege só quem usa."},
+  {t:"multi",h:"3. Inspecione a área",p:"Você chegou ao posto. Marque tudo o que impede iniciar a operação.",it:[
    ["⚙️","Protetor do volante instalado com apenas 2 dos 4 parafusos",1],["🛡️","Cortina de luz alinhada e testada no turno",0],["🖐️","Botão direito do bimanual travado com um pedaço de madeira",1],["🛢️","Lubrificação no nível, sem vazamento",0],["🛑","Botão de emergência que não trava ao ser pressionado",1],["🔌","Painel elétrico fechado, sem fios expostos",0],["🟨","Poça de óleo no piso em frente ao operador",1],["🗑️","Área limpa, sem sucata no acesso à saída",0],["🔩","Grampos de fixação da matriz folgados",1],["⚠️","Sinalização de zona de risco visível ao redor da prensa",0],["🦶","Pedal de acionamento protegido e fora de uso",0],["📋","Registro do teste de tempo de parada dentro do prazo",0]],
    w:"A inspeção está incorreta. Revise."},
-  {t:"seq",h:"3. Bloqueio de energia (troca de matriz)",p:"Toque nos passos na ordem correta.",it:[
-   ["⏻","Desligar o motor principal no painel",0],["🔒","Bloquear a chave geral com cadeado",1],["🏷️","Etiquetar com nome e data",2],["🌀","Aliviar a energia residual (volante parado)",3],["🧪","Testar ausência de energia",4]],w:W}],
+  {t:"seq",h:"4. Bloqueio de energia (troca de matriz)",p:"Toque nos passos na ordem correta.",it:[
+   ["⏻","Desligar o motor principal no painel",0],["🌀","Aliviar a energia residual (volante parado)",1],["🧪","Testar ausência de energia",2],["🏷️","Etiquetar com nome e data",3],["🔒","Bloquear a chave geral com cadeado",4]],w:W}],
  [ // 1 Ferramenta
   {t:"one",h:"Separe a chapa",p:"Pegue no estoque a chapa da peça do pedido ao lado.",it:[["🟫","SAE 1010 – 2,0 mm",1],["🟫","SAE 1010 – 1,5 mm",0],["🟫","SAE 1020 – 2,0 mm",0],["⬜","Inox 304 – 2,0 mm",0]],w:"Chapa não atende ao pedido."},
   {t:"one",h:"Escolha a matriz",p:"Pegue a matriz da peça do pedido ao lado.",it:[["🧰","MT-11",0],["🧰","MT-12",1],["🧰","MT-13",0],["🧰","MT-14",0]],w:"Matriz não confere com a IT."},
@@ -153,26 +170,28 @@ function mk2(){const W="Passo fora de ordem. Revise o procedimento.";return[
 
 const LV=[
 {ic:"🔥",nome:"Laser industrial – flange",ped:{n:"07",cli:"Setor de Montagem",q:"10× FLG-203"},mk:mk1,
- st:[["🦺","Segurança"],["🔧","Máquina"],["💻","Código"],["🎚️","Ajuste"],["🔥","Cortar"]],
- it:{t:"IT-LASER-001",info:"Laser de fibra 3 kW, 1064 nm. Potência e velocidade vêm do programa; não ajustar.",head:["Peça","Material","Esp.","Gás","Bico","Pressão","Foco","Altura"],rows:IT1,hl:"FLG-203",note:"Esp., bico, foco e altura em mm; pressão em bar. Tolerâncias: pressão ±0,1 bar, foco ±0,5 mm, altura ±0,2 mm."},
+ st:[["🦺","Segurança"],["🔧","Máquina"],["💾","Software"],["💻","Código"],["🎚️","Ajuste"],["🔥","Cortar"]],keys:["seg","maq","sw","cod","aj"],
+ it:{t:"IT-LASER-001",info:"Laser de fibra 3 kW, 1064 nm. Potência e velocidade vêm do programa; não ajustar. Arquivo FLANGE_3MM.dxf: unidade mm, escala 1:1, contornos fechados.",head:["Peça","Material","Esp.","Gás","Bico","Pressão","Foco","Altura"],rows:IT1,hl:"FLG-203",note:"Esp., bico, foco e altura em mm; pressão em bar. Tolerâncias: pressão ±0,1 bar, foco ±0,5 mm, altura ±0,2 mm."},
  fin:{h:"Cortar a peça",msg:"🔥 Cortando a peça...",
-  svg:`<svg viewBox="0 0 300 160" width="100%" style="max-height:240px;background:#6b7785;border:4px solid var(--ink);border-radius:16px"><rect x="30" y="20" width="240" height="120" fill="#b9c2cc" stroke="#1e2a38" stroke-width="3"/><circle id="p1" cx="150" cy="80" r="50" fill="none" stroke="#e4412f" stroke-width="3" stroke-dasharray="315" stroke-dashoffset="315"/><circle id="p2" cx="150" cy="80" r="14" fill="none" stroke="#e4412f" stroke-width="3" stroke-dasharray="90" stroke-dashoffset="90"/></svg>`,
+  svg:`<svg viewBox="0 0 300 160" width="100%" style="max-height:240px;background:#669BBC;border:4px solid var(--ink);border-radius:16px"><rect x="30" y="20" width="240" height="120" fill="#FDF0D5" stroke="#003049" stroke-width="3"/><circle id="p1" cx="150" cy="80" r="50" fill="none" stroke="#C1121F" stroke-width="3" stroke-dasharray="315" stroke-dashoffset="315"/><circle id="p2" cx="150" cy="80" r="14" fill="none" stroke="#C1121F" stroke-width="3" stroke-dasharray="90" stroke-dashoffset="90"/></svg>`,
   anim:d=>{let k=0;const a=$("#p1"),b=$("#p2");const iv=setInterval(()=>{k+=2;b.style.strokeDashoffset=Math.max(0,90-k*2);a.style.strokeDashoffset=Math.max(0,315-Math.max(0,k-45)*4);if(k>=125){clearInterval(iv);d()}},40)}}},
 {ic:"🔨",nome:"Prensa industrial – suporte",ped:{n:"12",cli:"Setor de Soldagem",q:"10× SUP-120"},mk:mk2,
- st:[["🦺","Segurança"],["🧰","Ferramenta"],["📋","Montagem"],["🎚️","Ajuste"],["🔨","Prensar"]],
+ st:[["🦺","Segurança"],["🧰","Ferramenta"],["📋","Montagem"],["🎚️","Ajuste"],["🔨","Prensar"]],keys:["seg","maq","cod","aj"],
  it:{t:"IT-PRENSA-001",info:"Prensa excêntrica 80 t, comando bimanual e cortina de luz. Peças em chapa dobrada.",head:["Peça","Material","Esp.","Matriz","Lubrif.","Força","Altura","Golpes"],rows:IT2,hl:"SUP-120",note:"Esp. e altura de fechamento em mm; força em t; golpes por minuto. Tolerâncias: força ±2 t, altura ±1 mm, golpes ±2."},
  fin:{h:"Prensar a peça",msg:"🔨 Prensando a peça...",
-  svg:`<svg viewBox="0 0 300 160" width="100%" style="max-height:240px;background:#6b7785;border:4px solid var(--ink);border-radius:16px"><rect x="30" y="140" width="240" height="16" fill="#2b4a6f"/><rect x="90" y="116" width="120" height="24" fill="#8a95a1" stroke="#1e2a38" stroke-width="3"/><rect x="80" y="110" width="140" height="6" fill="#b9c2cc"/><rect x="140" y="0" width="20" height="30" fill="#1e2a38"/><rect id="ram" x="90" y="20" width="120" height="40" fill="#e4412f" stroke="#1e2a38" stroke-width="3"/></svg>`,
+  svg:`<svg viewBox="0 0 300 160" width="100%" style="max-height:240px;background:#669BBC;border:4px solid var(--ink);border-radius:16px"><rect x="30" y="140" width="240" height="16" fill="#003049"/><rect x="90" y="116" width="120" height="24" fill="#669BBC" stroke="#003049" stroke-width="3"/><rect x="80" y="110" width="140" height="6" fill="#FDF0D5"/><rect x="140" y="0" width="20" height="30" fill="#003049"/><rect id="ram" x="90" y="20" width="120" height="40" fill="#C1121F" stroke="#003049" stroke-width="3"/></svg>`,
   anim:d=>{let k=0;const r=$("#ram");const iv=setInterval(()=>{k++;r.setAttribute("y",20+50*Math.abs(Math.sin(k*Math.PI/20)));if(k>=60){clearInterval(iv);d()}},50)}}}
 ];
 
 /* ===== BANCO DE DADOS =====
-   Para ATIVAR: (1) suba o backend_banco.js, (2) comente as 2 funções "MODO TESTE" abaixo,
+   Para ATIVAR: (1) suba o backend_banco.js, (2) comente as funções de "MODO TESTE" abaixo,
    (3) descomente o bloco "BANCO REAL" e ajuste API_URL. */
 
 // --- MODO TESTE (sem banco): aceita qualquer matrícula e só guarda no navegador ---
 async function validarMatricula(mat){return {matricula:mat,nome:null}}
 async function enviarSessao(r){return false}
+async function buscarHistorico(mat){return load().filter(r=>String(r.matricula)==String(mat)).reverse()}
+async function buscarRanking(){const m={};load().forEach(r=>{const k=r.maquina+"|"+r.matricula,o=m[k];if(!o||r.nota>o.melhor||(r.nota==o.melhor&&r.tempo_s<o.tempo_s))m[k]={maquina:r.maquina,matricula:r.matricula,nome:r.nome,melhor:r.nota,tempo_s:r.tempo_s}});return Object.values(m)}
 
 // --- BANCO REAL (descomente) ---
 // const API_URL="http://localhost:3000";   // endereço do servidor na rede da fábrica
@@ -190,19 +209,21 @@ async function enviarSessao(r){return false}
 //     return x.ok;
 //   }catch(e){return false}
 // }
+// async function buscarHistorico(mat){const r=await fetch(API_URL+"/api/historico/"+encodeURIComponent(mat));if(!r.ok)throw 0;return await r.json()}
+// async function buscarRanking(){const r=await fetch(API_URL+"/api/ranking");if(!r.ok)throw 0;return await r.json()}
 
 // reenvia sessões que ficaram só no navegador (ex.: servidor estava fora)
 async function sincronizar(){const h=load();let ch=0;for(const r of h){if(!r.enviado&&await enviarSessao(r)){r.enviado=1;ch=1}}
   if(ch)try{localStorage.setItem(KEY,JSON.stringify(h))}catch(e){}}
 
 function toast(m,ok){const t=$("#toast");t.textContent=m;t.className="toast "+(ok?"g":"b");t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,3200)}
-function err(st,n=1){S.er[st]+=n}
+function err(st,n=1){S.er[st]+=n;const g=S.D[st][S.sg[st]];if(g)g.e=(g.e||0)+n}
 function fmt(s){return String(s/60|0).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
 const load=()=>{try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return[]}};
 
 function start(){
-  A.innerHTML=`<div class="card"><h1>🔥 Laser Training</h1><p>Treinamento de operadores.</p>
-  <p>Treino de 5 a 15 minutos.</p><p><small>Versão 1.1</small></p>
+  A.innerHTML=`<div class="card"><h1>SG_COI</h1><p>Treinamento de operadores.</p>
+  <p>Treino de 5 a 15 minutos.</p><p><small>Versão 1.2</small></p>
   <label>Nome do operador (só no modo teste)<input id="nm" autocomplete="off"></label><label>Matrícula<input id="mt" autocomplete="off"></label>
   <button class="btn" id="go">▶ Começar</button></div>`;
   $("#go").onclick=async()=>{let nome=$("#nm").value.trim();const mat=$("#mt").value.trim();
@@ -216,32 +237,44 @@ function start(){
 }
 
 let OP;
-function menu(){A.innerHTML=`<div class="card"><h2>Olá, ${OP.nome}! Escolha a máquina</h2><div class="grid">${LV.map((l,i)=>`<button class="it" data-i="${i}"><i>${l.ic}</i>${l.nome}</button>`).join("")}</div><button class="btn alt" id="sa">⬅ Sair</button></div>`;
-  A.querySelectorAll(".it").forEach(b=>b.onclick=()=>play(+b.dataset.i));$("#sa").onclick=start}
-function play(i){S={nome:OP.nome,mat:OP.mat,lv:i,t0:Date.now(),tries:0,wrong:0,sq:0,sqOk:0,er:[0,0,0,0],cur:0,sg:[0,0,0,0],dn:[0,0,0,0,0],D:LV[i].mk()};game()}
+let rkI=0;
+async function menu(){A.innerHTML=`<div class="card"><h2>Olá, ${OP.nome}! Escolha a máquina</h2><div class="grid">${LV.map((l,i)=>`<button class="it" data-i="${i}"><i>${l.ic}</i>${l.nome}</button>`).join("")}</div><button class="btn alt" id="sa">⬅ Sair</button></div><div class="card" id="hr">Carregando seu histórico e o ranking...</div>`;
+  A.querySelectorAll(".it").forEach(b=>b.onclick=()=>play(+b.dataset.i));$("#sa").onclick=start;
+  try{const[h,rk]=await Promise.all([buscarHistorico(OP.mat),buscarRanking()]);hrView(h,rk)}catch(e){const x=$("#hr");if(x)x.textContent="Não foi possível carregar o histórico e o ranking agora."}}
+function hrView(h,rk){const el=$("#hr");if(!el)return;
+  const best=h.length?Math.max(...h.map(r=>r.nota)):"-",avg=h.length?Math.round(h.reduce((a,r)=>a+r.nota,0)/h.length):"-",me=r=>String(r.matricula)==String(OP.mat);
+  const L=rk.filter(r=>r.maquina==LV[rkI].nome).sort((a,b)=>b.melhor-a.melhor||a.tempo_s-b.tempo_s),pos=L.findIndex(me);
+  el.innerHTML=`<h2>📈 Seu histórico</h2><p>Sessões: <b>${h.length}</b> · Melhor nota: <b>${best}</b> · Média: <b>${avg}</b></p>${h.length?`<table><tr><th>Data</th><th>Máquina</th><th>Nota</th><th>Tempo</th><th>Resultado</th></tr>${h.slice(0,8).map(r=>`<tr><td>${r.data.slice(8,10)}/${r.data.slice(5,7)}</td><td>${r.maquina.split(" ")[0]}</td><td>${r.nota}</td><td>${fmt(r.tempo_s)}</td><td>${r.aprovado?"✅ Aprovado":"🔁 Refazer"}</td></tr>`).join("")}</table>`:"<p>Você ainda não fez nenhum treino.</p>"}
+  <h2 style="margin-top:14px">🏆 Ranking</h2><div class="grid" style="margin:6px 0">${LV.map((l,i)=>`<button class="btn ${i==rkI?"":"alt"}" data-k="${i}">${l.ic} ${l.nome.split(" ")[0]}</button>`).join("")}</div>
+  <p>${pos>=0?`Sua posição: <b>${pos+1}º</b> de ${L.length}`:"Você ainda não está neste ranking. Faça o treino para entrar."}</p><table><tr><th>#</th><th>Operador</th><th>Melhor nota</th><th>Tempo</th></tr>${L.map((r,i)=>[i+1,r]).filter(([i,r])=>i<=5||me(r)).map(([i,r])=>`<tr${me(r)?' class="hl"':""}><td>${i}º</td><td>${r.nome}</td><td>${r.melhor}</td><td>${fmt(r.tempo_s)}</td></tr>`).join("")}</table>`;
+  el.querySelectorAll("[data-k]").forEach(b=>b.onclick=()=>{rkI=+b.dataset.k;hrView(h,rk)})}
+function play(i){S={nome:OP.nome,mat:OP.mat,lv:i,t0:Date.now(),tries:0,wrong:0,sq:0,sqOk:0,er:Array(LV[i].st.length-1).fill(0),cur:0,sg:Array(LV[i].st.length-1).fill(0),dn:Array(LV[i].st.length).fill(0),D:LV[i].mk()};game()}
 
 function game(){
-  const s=S,unlocked=i=>i==0||(i<4?s.dn[0]:s.dn[0]&&s.dn[1]&&s.dn[2]&&s.dn[3]);
+  const s=S,last=LV[s.lv].st.length-1,unlocked=i=>i==0||(i<last?s.dn[0]:s.dn.slice(0,last).every(Boolean));
+  const bkb=s.cur<last&&s.sg[s.cur]>0?'<button class="btn alt" id="bk">⬅ Voltar</button>':"";
   const nav=LV[s.lv].st.map((x,i)=>`<button class="st ${i==s.cur?"on":s.dn[i]?"ok":""} ${unlocked(i)?"":"lock"}" data-i="${i}"><b>${s.dn[i]?"✅":x[0]}</b>${x[1]}</button>`).join("");
   A.innerHTML=`<div class="card top"><div><b>${s.nome}</b> · ${LV[s.lv].nome} · <span id="tm">${fmt((Date.now()-s.t0)/1000|0)}</span></div>
   </div>
-  <div class="lay"><div><div class="nav">${nav}</div><div class="card" id="stage"></div></div>${itHTML()}</div>`;
+  <div class="lay"><div><div class="nav" style="grid-template-columns:repeat(${last+1},1fr)">${nav}</div><div class="card" id="stage"></div>${bkb}</div>${itHTML()}</div>`;
   A.querySelectorAll(".st").forEach(b=>b.onclick=()=>{const i=+b.dataset.i;
     if(!unlocked(i))return toast(i==0?"":s.dn[0]?"Termine as estações anteriores.":"Conclua a Segurança primeiro.",0);s.cur=i;game()});
   stage();
+  if($("#bk"))$("#bk").onclick=back;
 }
+function back(){const c=S.cur;if(S.sg[c]>0){S.sg[c]--;S.dn[c]=0;const g=S.D[c][S.sg[c]];g.sel={};g.nx=0;g.shown={}}game()}
 
 function adv(){const s=S,c=s.cur;s.sg[c]++;if(s.sg[c]>=s.D[c].length)s.dn[c]=1;
-  if(s.dn[c]){toast("Estação concluída!",1);const nx=s.dn.findIndex((d,i)=>!d&&i<4);s.cur=nx<0?4:nx}game()}
+  if(s.dn[c]){toast("Estação concluída!",1);const L=s.dn.length-1,nx=s.dn.findIndex((d,i)=>!d&&i<L);s.cur=nx<0?L:nx}game()}
 
 function stage(){
   const s=S,c=s.cur,el=$("#stage");
-  if(c==4)return cut(el);
-  const g=s.D[c][s.sg[c]];if(!g)return;
+  if(c==s.dn.length-1)return cut(el);
+  const g=s.D[c][s.sg[c]];if(!g){el.innerHTML=`<h2>✅ Estação concluída</h2><p>Você pode voltar e rever suas respostas.</p>`;return}
   let h=`<h2>${g.h}</h2><p>${g.p}</p>`;
   if(g.t=="adj"){
     g.r.forEach(r=>{if(r.cur==null)r.cur=r.v});
-    el.innerHTML=h+`<svg id="mq" viewBox="0 0 520 300" width="100%" style="touch-action:none;display:block;background:#e9eff3;border:4px solid var(--ink);border-radius:16px"></svg><div id="ar" class="hmi"></div><button class="btn" id="ok">✔ Confirmar ajuste</button>`;
+    el.innerHTML=h+`<svg id="mq" viewBox="0 0 520 300" width="100%" style="touch-action:none;display:block;background:#FDF0D5;border:4px solid var(--ink);border-radius:16px"></svg><div id="ar" class="hmi"></div><button class="btn" id="ok">✔ Confirmar ajuste</button>`;
     const sv=$("#mq");let ac=null;
     const pt=e=>{const b=sv.getBoundingClientRect();return[(e.clientX-b.left)/b.width*520,(e.clientY-b.top)/b.height*300]};
     const rd=()=>{sv.innerHTML=g.draw(g.r,ac!=null?ac:g.foc);
@@ -259,7 +292,7 @@ function stage(){
     sv.addEventListener("wheel",e=>{const t=e.target.closest("[data-p]");if(!t)return;e.preventDefault();const i=+t.dataset.p;g.foc=i;setv(i,g.r[i].cur+(e.deltaY<0?1:-1)*g.r[i].st)},{passive:false});
     sv.onkeydown=e=>{const t=e.target.closest("[data-p]"),d={ArrowUp:1,ArrowRight:1,ArrowDown:-1,ArrowLeft:-1}[e.key];if(!t||!d)return;e.preventDefault();const i=+t.dataset.p;g.foc=i;setv(i,g.r[i].cur+d*g.r[i].st)};
     rd();
-    $("#ok").onclick=()=>{let n=0;g.r.forEach(r=>{if(r.cur<r.lo||r.cur>r.hi)n++});s.tries+=3;s.wrong+=n;err(3,n);if(n)toast(n+" parâmetro(s) fora do especificado. Consulte a IT.",0);else{toast("Ajuste correto!",1);adv()}};
+    $("#ok").onclick=()=>{let n=0;g.r.forEach(r=>{if(r.cur<r.lo||r.cur>r.hi)n++});s.tries+=3;s.wrong+=n;err(c,n);if(n)toast(n+" parâmetro(s) fora do especificado. Consulte a IT.",0);else{toast("Ajuste correto!",1);adv()}};
     return}
   if(!g.sh)g.sh=shuffle(g.it.map((x,i)=>i));
   g.sel=g.sel||{};g.shown=g.shown||{};g.nx=g.nx||0;
@@ -282,24 +315,25 @@ function stage(){
 }
 
 function cut(el){const f=LV[S.lv].fin;
-  if(!S.dn.slice(0,4).every(Boolean)){el.innerHTML=`<h2>${f.h}</h2><p>Conclua as estações anteriores.</p>`;return}
+  if(!S.dn.slice(0,-1).every(Boolean)){el.innerHTML=`<h2>${f.h}</h2><p>Conclua as estações anteriores.</p>`;return}
   el.innerHTML=`<h2>${f.h}</h2><p>${f.msg}</p>${f.svg}`;
   if(!S.run){S.run=1;setTimeout(()=>f.anim(finish),500)}
 }
 
 async function finish(){
   const s=S,t=Math.round((Date.now()-s.t0)/1000),taxa=s.tries?(s.tries-s.wrong)/s.tries:1,ad=s.sq?s.sqOk/s.sq:1,tp=Math.min(1,600/Math.max(t,1));
+  const ek=k=>{const i=LV[s.lv].keys.indexOf(k);return i<0?0:s.er[i]},cl=[];s.D.forEach((sx,c)=>sx.forEach(g=>cl.push({e:LV[s.lv].st[c][1],i:g.h.replace(/^\d+\.\s*/,""),x:g.e||0})));
   const pen=2*s.wrong+2*s.er[0],nota=Math.max(0,Math.round((taxa*.6+ad*.2+tp*.2)*100)-pen),ap=nota>=70?1:0;
-  const r={id:Date.now(),data:new Date().toISOString(),nome:s.nome,matricula:s.mat,maquina:LV[s.lv].nome,nota,taxa_acertos:+(taxa*100).toFixed(1),aderencia_sequencia:+(ad*100).toFixed(1),tempo_s:t,erros_seguranca:s.er[0],erros_maquina:s.er[1],erros_codigo:s.er[2],erros_ajuste:s.er[3],aprovado:ap};
+  const r={id:Date.now(),data:new Date().toISOString(),nome:s.nome,matricula:s.mat,maquina:LV[s.lv].nome,nota,taxa_acertos:+(taxa*100).toFixed(1),aderencia_sequencia:+(ad*100).toFixed(1),tempo_s:t,erros_seguranca:ek("seg"),erros_maquina:ek("maq"),erros_codigo:ek("cod"),erros_ajuste:ek("aj"),erros_programa:ek("sw"),aprovado:ap,checklist:JSON.stringify(cl)};
   r.enviado=(await enviarSessao(r))?1:0;const h=load();h.push(r);try{localStorage.setItem(KEY,JSON.stringify(h))}catch(e){toast("Não foi possível salvar neste computador. Avise o líder.",0)}
   S.last=r;
   const stars=nota>=90?"⭐⭐⭐":nota>=75?"⭐⭐":nota>=60?"⭐":"";
   A.innerHTML=`<div class="card"><p class="big">${ap?"🏆":"🔁"} ${nota} pontos ${stars}</p><h2>${ap?"Aprovado! Peça produzida sem refugo.":"Quase lá. Repita o treino."}</h2>
   <p>Acertos: <b>${r.taxa_acertos}%</b> · Sequência da IT: <b>${r.aderencia_sequencia}%</b> · Tempo: <b>${fmt(t)}</b></p>
   <p>Erros: segurança ${r.erros_seguranca}, máquina ${r.erros_maquina}, código ${r.erros_codigo}, ajuste ${r.erros_ajuste}</p><p>Descontos por erros: -${pen} pontos</p>
-  <p>${r.enviado?"✅ Enviado ao banco de dados.":"💾 Salvo só neste computador (banco não conectado)."}</p>
-  <button class="btn" id="a">↻ Escolher máquina</button></div>`;
-  $("#a").onclick=menu;
+  <h2>📋 Checklist da sessão</h2><p><small>${s.nome} (${s.mat}) · ${LV[s.lv].nome} · ${new Date().toLocaleString("pt-BR")}</small></p><ul class="ck">${cl.map(c=>`<li>${c.x?"⚠️":"✅"} ${c.e}: ${c.i}${c.x?` (${c.x} erro${c.x>1?"s":""})`:""}</li>`).join("")}<li>✅ Execução concluída</li></ul><p><small>⚠️ = errou antes de acertar.</small></p><p>${r.enviado?"✅ Enviado ao banco de dados.":"💾 Salvo só neste computador (banco não conectado)."}</p>
+  <button class="btn" id="a">↻ Escolher máquina</button> <button class="btn alt" id="pr">🖨️ Imprimir checklist</button></div>`;
+  $("#a").onclick=menu;$("#pr").onclick=()=>window.print();
 }
 
 setInterval(()=>{const e=$("#tm");if(e&&S&&S.t0)e.textContent=fmt((Date.now()-S.t0)/1000|0)},1000);
